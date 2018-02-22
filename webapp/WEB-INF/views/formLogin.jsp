@@ -35,7 +35,7 @@
 				<h4 class="form-signin-heading" style="color:red">Acceso denegado</h4>
 			</c:if>
 	   	       
-			<h3 class="form-signin-heading">ProdeApp | Administracion</h3>        
+			<h3 class="form-signin-heading">ProdeApp</h3>        
 			<label for="username" class="sr-only">Usuario</label>
 			<input type="text" id="username" name="username" class="form-control" placeholder="Usuario" required autofocus>
 			<label for="password" class="sr-only">Contraseña</label>

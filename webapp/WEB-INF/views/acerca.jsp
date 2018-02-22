@@ -8,7 +8,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">	
 	<meta name="description" content="">
 	<meta name="author" content="">	
-	<title>CineSite | Bienvenido</title>
+	<title>ProdeApp | Bienvenido</title>
 	<spring:url value="/resources" var="urlPublic" />
 		
 	<link href="${urlPublic}/bootstrap/css/bootstrap.min.css" rel="stylesheet">	
@@ -36,12 +36,11 @@
 					<div class="col-sm-9">
 						<div class="panel panel-default">
 							<div class="panel-heading">
-								<h3 class="panel-title">Udemy - Spring MVC y Spring Data JPA - Desarrollo Web con Spring 5</h3>
+								<h3 class="panel-title">Desarrollo Web con Spring 5</h3>
 							</div>
 							<div class="panel-body">
 								
-								<div class="alert alert-danger" role="alert">ESTA APLICACION DEMO ES PARA QUE PUEDAS VER LA FUNCIONALIDAD COMPLETA DE LA APLICACION
-								QUE SERÁS CAPAS DE DESARROLLAR AL FINALIZAR EL CURSO. POR LO TANTO PUEDES CREAR, ACTUALIZAR Y HASTA ELIMINAR REGISTROS.</div>
+								<div class="alert alert-danger" role="alert">ESTA APLICACION FUE DESARROLADA CON FINES DE APRENDIZAJE.</div>
 								
 							</div>
 						</div>

@@ -1,5 +1,6 @@
 package net.itinajero.app.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,16 +22,29 @@ public class ApuestasServiceJPA implements IApuestasService{
 	public void insertar(Apuesta apuesta) {
 		apuestasRepo.save(apuesta);
 	}
-	/*
+	 /*
 	@Override
 	public List<Apuesta> buscarPorJornada(int idJornada){
 		
 		//Date fecha = new Date();
-		List<Partido> partidos = partidosRepo.findByJornada_Id(idJornada); 
-		return partidos;
+		List<Apuesta> apuestas = apuestasRepo.findByJornada_Id(idJornada); 
+		return apuestas;
 				 		
+	}*/
+
+	@Override
+	public List<Apuesta> buscarPorPartidos(List<Partido> partidos) {		
+		List<Apuesta> apuestas = new ArrayList<Apuesta>();
+		
+		for (Partido partido : partidos) {
+			Apuesta apuesta = apuestasRepo.findByPartido_Id(partido.getId());
+			if (apuesta != null){
+				apuestas.add(apuesta);
+			}
+		}
+		return apuestas;
 	}
-	*/	
+	 
 /*
 	@Override
 	public void eliminar(int idApuesta) {

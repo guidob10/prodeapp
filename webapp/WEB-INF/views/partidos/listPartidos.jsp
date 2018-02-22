@@ -1,7 +1,6 @@
 <%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
-<%@taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
 <!DOCTYPE html>
 <html lang="en">
 	<head>
@@ -10,10 +9,9 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">	
 	<meta name="description" content="">
 	<meta name="author" content="">		
-	<title>Listado de Jornadas</title>
+	<title>Listado de Partidos</title>
 	<spring:url value="/resources" var="urlPublic" />
-	<spring:url value="/jornadas" var="urlJornadas" />
-	<spring:url value="/apuestas" var="urlApuestas" />
+	<spring:url value="/partidos" var="urlPartidos" />
 	
 	<link href="${urlPublic}/bootstrap/css/bootstrap.min.css" rel="stylesheet">	
 	<link href="${urlPublic}/bootstrap/css/theme.css" rel="stylesheet">
@@ -26,46 +24,33 @@
 	
 	<div class="container theme-showcase" role="main">
 
-		<h3>Listado de Jornadas</h3>
+		<h3>Listado de Partidos</h3>
       
         <c:if test="${msg !=null }">        
         		<div class='alert alert-success' role='alert'>${msg}</div>
         </c:if>	
               
-        <!--   <a href="${urlJornadas}/create" class="btn btn-success" role="button" title="Nueva Pelicula" >Nueva</a><br><br>  -->       
+        <a href="${urlPartidos}/create" class="btn btn-success" role="button" title="Nuevo Partido" >Nuevo</a><br><br>        
       
         <div class="table-responsive">
 	        <table class="table table-hover table-striped table-bordered">
 	          <tr>
-	              <th>Numero Jornada</th>
-	              <th>Fecha Inicio </th>
-	              <th>Apuesta</th>
-	              <sec:authorize access="hasAnyAuthority('EDITOR')">  
-		              <th>Editar Jornada</th>
-	              </sec:authorize>
+	              <th>Id</th>
+	              <th>Fecha Partido</th>
+	              <th>Puntos Local</th>
+				  <th>Puntos Visita</th>
 	          </tr>
 	
-				<c:forEach var="jornada" items="${jornadas.content}">
+				<c:forEach var="partido" items="${partidos.content}">
 					<tr>
-						<td>${jornada.numeroJornada}</td>
-						<td><fmt:formatDate pattern="dd-MM-yyyy"
-								value="${jornada.fechaInicio}" /></td>
-						
-						<!-- <c:choose>
-							<c:when test=" ">
-								<td><span class="label label-success"> </span></td>
-							</c:when>
-							<c:otherwise>
-								<td><span class="label label-danger"> </span></td>
-							</c:otherwise>
-						</c:choose> -->
+						<td>${partido.id}</td>
+						<td>${partido.fechaPartido}</td>
+						<td>${partido.puntosLocal}</td>
+						<td>${partido.puntosVisita}</td>
+
 						<td>
-							<a href="${urlApuestas}/edit/${jornada.id}" class="btn btn-success btn-sm" role="button" title="Apostar Fecha"><span class="glyphicon glyphicon-pencil"></span></a>							
-						</td>
-						<td>
-							<sec:authorize access="hasAnyAuthority('EDITOR')">
-							editar
-							</sec:authorize>
+							<a href="${urlPartidos}/edit/${partido.id}" class="btn btn-success btn-sm" role="button" title="Edit"><span class="glyphicon glyphicon-pencil"></span></a>
+							<a href="${urlPartidos}/delete/${partido.id}" onclick='return confirm("¿Estas seguro?")' class="btn btn-danger btn-sm" role="button" title="Eliminar"><span class="glyphicon glyphicon-trash"></span></a>
 						</td>
 					</tr>
 				</c:forEach>
@@ -74,8 +59,8 @@
 		
 		<nav aria-label="">
 		  <ul class="pager">
-		    <li><a href="${urlJornadas}/indexPaginate?page=${jornadas.number - 1 }">Anterior</a></li>
-		    <li><a href="${urlJornadas}/indexPaginate?page=${jornadas.number + 1 }">Siguiente</a></li>
+		    <li><a href="${urlPartidos}/indexPaginate?page=${partidos.number - 1 }">Anterior</a></li>
+		    <li><a href="${urlPartidos}/indexPaginate?page=${partidos.number + 1 }">Siguiente</a></li>
 		  </ul>
 		</nav>
 

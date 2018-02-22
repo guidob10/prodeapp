@@ -32,14 +32,12 @@
 	            <span class="icon-bar"></span>
 	            <span class="icon-bar"></span>
 	          </button>
-	          <a class="navbar-brand" href="${urlRoot}admin/index">Mi Prode | Administracion</a>
+	          <a class="navbar-brand" href="${urlRoot}admin/index">Mi Prode | Jugador</a>
 	        </div>
 	        <div id="navbar" class="navbar-collapse collapse">
-	          <ul class="nav navbar-nav">  
-	            <li><a href="${urlRoot}peliculas/indexPaginate?page=0">Peliculas</a></li>	            
+	          <ul class="nav navbar-nav">
+	            <li><a href="${urlRoot}">Inicio</a></li>  	            
 	            <li><a href="${urlRoot}jornadas/indexPaginate?page=0">Apuestas</a></li>
-	            <li><a href="${urlRoot}horarios/indexPaginate?page=0">Horarios</a></li>
-	            <li><a href="${urlRoot}noticias/index">Noticias</a></li>
 	            <li><a href="${urlRoot}admin/logout">Salir</a></li>	           
 	          </ul>
 	        </div><!--/.nav-collapse -->
@@ -58,7 +56,8 @@
 	        </div>
 	        <div id="navbar" class="navbar-collapse collapse">
 	          <ul class="nav navbar-nav">  
-	            <li><a href="${urlRoot}peliculas/indexPaginate?page=0">Peliculas</a></li>			            
+	            <li><a href="${urlRoot}peliculas/indexPaginate?page=0">Peliculas</a></li>
+	            <li><a href="${urlRoot}partidos/indexPaginate?page=0">Partidos</a></li>			            
 	            <li><a href="${urlRoot}horarios/indexPaginate?page=0">Horarios</a></li>
 	            <li><a href="${urlRoot}noticias/index">Noticias</a></li>
 	            <li><a href="${urlRoot}banners/index">Banner</a></li>             	           

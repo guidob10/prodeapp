@@ -6,8 +6,11 @@ import net.itinajero.app.model.Apuesta;
 
 public class ApuestaForm {
 
-
 	private List<Apuesta> apuestas;
+	
+	public ApuestaForm() {
+
+	}		
 
 	public List<Apuesta> getApuestas() {
 		return apuestas;

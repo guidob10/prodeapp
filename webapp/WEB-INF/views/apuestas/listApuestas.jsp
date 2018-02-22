@@ -2,6 +2,7 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
 <!DOCTYPE html>
 <html lang="en">
 	<head>
@@ -13,8 +14,8 @@
 	<title>Listado de Partidos por Jornada</title>
 	<spring:url value="/resources" var="urlPublic" />
 	<spring:url value="/jornadas" var="urlJornadas" />
-	<spring:url value="/apuestas" var="urlApuestas" />
 	<spring:url value="/apuestas/save" var="urlForm" />	
+	<spring:url value="/apuestas/savee" var="urlForme" />	
 	
 	<link href="${urlPublic}/bootstrap/css/bootstrap.min.css" rel="stylesheet">	
 	<link href="${urlPublic}/bootstrap/css/theme.css" rel="stylesheet">
@@ -33,8 +34,7 @@
         		<div class='alert alert-success' role='alert'>${msg}</div>
         </c:if>	                            
       
-      	<form:form action="${urlForm}" method="POST" enctype="multipart/form-data"  modelAttribute="ApuestaForm" >
-      	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+      	<form:form action="${urlForm}" method="POST"   modelAttribute="apuestaForm"  >
         <div class="table-responsive">
 	        <table class="table table-hover table-striped table-bordered">
 	          <tr>
@@ -42,38 +42,33 @@
 	              <th>Fecha Inicio </th>
 	              <th>Local</th>
 	              <th>Visita</th>
-	              <th>Apuesta</th>
+	              <th>Ganador</th>
 	          </tr>
 		
-			  <c:forEach var="partido" items="${partidos}">
+			  <c:forEach varStatus="us" var="apuesta" items="${apuestaForm.apuestas}" >
 					<tr>
-						<td>${partido.id}</td>
+						<td>${apuesta.id}</td>
 						<td><fmt:formatDate pattern="dd-MM-yyyy"
-								value="${partido.fechaPartido}" /></td>
-						<td>${partido.local.nombreClub} 
-						        <label>
-            						<input type="radio" name="ganador${partido.id}" value="azul"> 
-        						</label>
+								value="${apuesta.partido.fechaPartido}" /></td>
+						<td>${apuesta.partido.local.nombreClub} 
         				</td>
-						<td>${partido.visita.nombreClub}
-						        <label>
-            						<input type="radio" name="ganador${partido.id}" value="azul"> 
-        						</label>
-        				</td>
-	
-						<td>
-							<a href="1/edit/1" class="btn btn-success btn-sm" role="button" title="Edit"><span class="glyphicon glyphicon-pencil"></span></a>
-							<a href="2/delete/2" onclick='return confirm("¿Estas seguro?")' class="btn btn-danger btn-sm" role="button" title="Eliminar"><span class="glyphicon glyphicon-trash"></span></a>
+						<td>${apuesta.partido.visita.nombreClub}   				         					    						
+        				</td>	
+						<td>					 							   					              				
+	                 		<form:radiobutton path="apuestas[${us.index}].ganador" value="0"/> Local
+	                 		<form:radiobutton path="apuestas[${us.index}].ganador" value="1"/> Visita              								       
 						</td>
-					</tr>
-				</c:forEach>
-			
+						<form:input type="hidden"  path="apuestas[${us.index}].id"/>
+						<form:input type="hidden"  path="apuestas[${us.index}].partido.id"/>	
+						<form:input type="hidden" path="apuestas[${us.index}].usuario.id" value="1"  />											
+					</tr>	
+				</c:forEach>			
 			</table>
 		</div>	
     	<button type="submit" class="btn btn-danger" >Guardar</button>	
+    	<input type="hidden"name="${_csrf.parameterName}" value="${_csrf.token}"/>
       	</form:form> 	
-       	
-		
+      	 	       		
 		<!-- pag
 		<nav aria-label="">
 		  <ul class="pager">

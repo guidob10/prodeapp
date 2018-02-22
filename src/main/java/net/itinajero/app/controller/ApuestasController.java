@@ -1,6 +1,7 @@
 package net.itinajero.app.controller;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
@@ -14,6 +15,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import net.itinajero.app.formsentity.ApuestaForm;
 import net.itinajero.app.model.Apuesta;
+import net.itinajero.app.model.Noticia;
 import net.itinajero.app.model.Partido;
 import net.itinajero.app.model.Pelicula;
 import net.itinajero.app.service.IApuestasService;
@@ -34,76 +36,43 @@ public class ApuestasController {
 	
 	@GetMapping(value = "/edit/{id}")
 	public String editar(@PathVariable("id") int idJornada, Model model) {	
+		List<Apuesta> apuestas;
+		ApuestaForm apuestaForm = new ApuestaForm();
+
+		List<Partido> partidos = servicePartidos.buscarPorJornada(idJornada);
+		//buscar apuesta por usuario jornada, si no existe, crear primera.
+		apuestas = serviceApuestas.buscarPorPartidos(partidos);		
 		
-		List<Partido> partidos = servicePartidos.buscarPorJornada(idJornada);	
-	//	Apuesta apuesta = serviceApuestas.buscarPorJornada(idJornada);			
-	//	model.addAttribute("apuesta", apuesta);
-		model.addAttribute("partidos", partidos);
+	 	if (apuestas == null || apuestas.isEmpty()){
+			//apuestas = new ArrayList<Apuesta>();			
+
+			for (Partido partido : partidos) {
+				Apuesta apuesta = new Apuesta();
+				apuesta.setPartido(partido);
+				apuestas.add(apuesta);
+			}
+		}
+		
+		apuestaForm.setApuestas(apuestas);		
+
+		model.addAttribute("apuestaForm", apuestaForm);
 		return "apuestas/listApuestas";
 	}    
-    
-    
-/*
-	@GetMapping(value = "/index")
-	public String mostrarIndex(Model model) {
-	//	List<Apuesta> lista = serviceApuestas.buscarTodas();
-		List<Apuesta> lista = null;
-		model.addAttribute("apuestas", lista);
-		return "apuestas/listApuestas";
-	}
-	*/	
-	
-	//@PostMapping(value = "/save")
-	//public String guardar(BindingResult result, Model model,
-	//		@RequestParam("archivoImagen") MultipartFile multiPart, HttpServletRequest request, RedirectAttributes attributes) {
-	
-	/*
-	@RequestMapping(method=RequestMethod.POST)
-	public String guardar(@RequestParam Apuesta[] apuestas, Model model) {	
-	//public String procesaForm(BusquedaOfertas bo, Model modelo) {
-		 
-	//	if (result.hasErrors()){
-			
-	//		System.out.println("Existieron errores");
-	//		return "apuestas/listApuestas";
-	//	}
-	 
-		System.out.println("Existieron"+ apuestas);
-
-		// Primero insertamos el detalle
-	    serviceDetalles.insertar(pelicula.getDetalle());
-	    
-		// Como el Detalle ya tiene id, ya podemos guardar la pelicula
-		servicePeliculas.insertar(pelicula);
-		attributes.addFlashAttribute("msg", "Los datos de la pelicula fueron guardados!");
-		
-		//return "redirect:/peliculas/index";
-		return "redirect:/jornadas/mostrarIndexPaginado";		
-	}
-				
-	*/
-	
-	
-//	@RequestMapping(value = "/save", method = RequestMethod.POST)
-//	public String guardar(@ModelAttribute("apuestaForm") ApuestaForm apuestaForm) {
+    	
 	@PostMapping(value = "/save")
 	public String guardar(@ModelAttribute ApuestaForm apuestaForm, BindingResult result, Model model,
-			 HttpServletRequest request,RedirectAttributes attributes) {	
+			RedirectAttributes attributes) {	
 		System.out.println(apuestaForm);
 		System.out.println(apuestaForm.getApuestas());
 		List<Apuesta> apuestas = apuestaForm.getApuestas();
 		
-		/*
-		if(null != apuestas && apuestas.size() > 0) {
-			ApuestasController.apuestas = apuestas;
-			for (Apuesta apuestas : apuestas) {
-				System.out.printf("%s \t %s \n", apuestas.getFirstname(), apuestas.getLastname());
-			}
-		}
-		*/
-		// return new ModelAndView("show_contact", "contactForm", contactForm);
-		return "redirect:/jornadas/mostrarIndexPaginado";	
+		for (Apuesta apuesta : apuestas){
+			
+			serviceApuestas.insertar(apuesta);
+		}				
+		
+		attributes.addFlashAttribute("msg", "Apuesta Realizada!");
+		return "redirect:/jornadas/indexPaginate?page=0";	
 	}	
-
 
 }

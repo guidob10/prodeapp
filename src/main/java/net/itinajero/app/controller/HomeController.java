@@ -60,7 +60,7 @@ public class HomeController {
 			
 			model.addAttribute("fechas", listaFechas);
 			model.addAttribute("fechaBusqueda", dateFormat.format(new Date()));
-		 //	model.addAttribute("peliculas", peliculas);
+		 //	 model.addAttribute("peliculas", peliculas);
 			model.addAttribute("partidos",partidos);
 		} catch (ParseException e) {
 			System.out.println("Error: HomeController.mostrarPrincipal" + e.getMessage());
