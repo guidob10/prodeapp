@@ -1,7 +1,7 @@
 <%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
-<%@taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
+<%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <!DOCTYPE html>
 <html lang="en">
 	<head>
@@ -40,9 +40,9 @@
 	              <th>Numero Jornada</th>
 	              <th>Fecha Inicio </th>
 	              <th>Apuesta</th>
-	              <sec:authorize access="hasAnyAuthority('EDITOR')">  
-		              <th>Editar Jornada</th>
-	              </sec:authorize>
+	          
+		              <th>ver como mostrar por rol.</th>
+	              
 	          </tr>
 	
 				<c:forEach var="jornada" items="${jornadas.content}">
@@ -63,9 +63,7 @@
 							<a href="${urlApuestas}/edit/${jornada.id}" class="btn btn-success btn-sm" role="button" title="Apostar Fecha"><span class="glyphicon glyphicon-pencil"></span></a>							
 						</td>
 						<td>
-							<sec:authorize access="hasAnyAuthority('EDITOR')">
-							editar
-							</sec:authorize>
+							 ver como mostrar por rol.
 						</td>
 					</tr>
 				</c:forEach>

@@ -194,7 +194,7 @@ CREATE TABLE `usuarioperfil` (
 
 /*Data for the table `usuarioperfil` */
 
-insert  into `usuarioperfil`(`id`,`username`,`perfil`) values (1,'luis','EDITOR'),(2,'marisol','GERENTE');
+insert  into `usuarioperfil`(`id`,`username`,`perfil`) values (1,'luis','editor'),(2,'marisol','gerente');
 
 /*Table structure for table `usuarios` */
 
@@ -206,14 +206,31 @@ CREATE TABLE `usuarios` (
   `email` varchar(50) NOT NULL,
   `username` varchar(100) NOT NULL,
   `password` varchar(100) NOT NULL,
-  `enabled` int(1) NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`),
   UNIQUE KEY `username` (`username`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 /*Data for the table `usuarios` */
 
-insert  into `usuarios`(`id`,`nombre`,`email`,`username`,`password`,`enabled`) values (1,'Luis (Editor de My CineSite)','editor@cinesite.com','luis','$2a$10$AETWiBpAoJQkho0/8XWfredrElkH8CrSXFSD9yUHbik924VUlKWB6',1),(2,'Marisol (Gerente de My CineSite)','gerente@cinesite.com','marisol','$2a$10$5Z8LcbSeBZYWR29jzL1Ku.e0q.2DMacqLGVFuP7OroxL/9I9HJLh6',1);
+insert  into `usuarios`(`id`,`nombre`,`email`,`username`,`password`) values (1,'Luis (Editor de My CineSite)','editor@cinesite.com','luis','e6ba4060d7bc5a577715be0c5352a6f1'),(2,'Marisol (Gerente de My CineSite)','gerente@cinesite.com','marisol','c21b6a13d68b58cd46df1f0c60d157fa'),(3,'a','a@a.com','a','a');
+
+/*Table structure for table `usuarioss` */
+
+DROP TABLE IF EXISTS `usuarioss`;
+
+CREATE TABLE `usuarioss` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `nombre` varchar(150) NOT NULL,
+  `email` varchar(50) NOT NULL,
+  `username` varchar(100) NOT NULL,
+  `password` varchar(100) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `username` (`username`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+
+/*Data for the table `usuarioss` */
+
+insert  into `usuarioss`(`id`,`nombre`,`email`,`username`,`password`) values (1,'Luis (Editor de My CineSite)','editor@cinesite.com','luis','e6ba4060d7bc5a577715be0c5352a6f1'),(2,'Marisol (Gerente de My CineSite)','gerente@cinesite.com','marisol','c21b6a13d68b58cd46df1f0c60d157fa'),(3,'a','a@a.com','a','a');
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;

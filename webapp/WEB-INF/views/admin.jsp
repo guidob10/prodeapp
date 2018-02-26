@@ -1,6 +1,5 @@
 <%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
 <!DOCTYPE html>
 <html lang="en">
 	<head>
@@ -25,7 +24,7 @@
 
 	  <div class="jumbotron">        
         <h3>Administración del Sistema</h3>
-        <p>Bienvenido(a) <sec:authentication property="principal.username"/> </p>
+        <p>Bienvenido(a) </p>
       </div>
 
       <jsp:include page="includes/footer.jsp"></jsp:include>		

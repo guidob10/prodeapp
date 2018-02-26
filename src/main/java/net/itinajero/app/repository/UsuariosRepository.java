@@ -13,9 +13,7 @@ import net.itinajero.app.model.Usuario;
 @Repository
 public interface UsuariosRepository extends JpaRepository<Usuario, Integer> {
 
-	// Listado de peliculas filtradas por estatus
-	 //public List<Jornada> findByEstatus_OrderByTitulo(String estatus);
-//	public List<Jornada> findByFechaInicioGreaterThan(Date fechaInicio);
+	//Usuario findByUsername(String username);
 	
 
 }
