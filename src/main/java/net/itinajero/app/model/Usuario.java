@@ -21,7 +21,7 @@ public class Usuario {
 	private String email;
 	private String username;
 	private String password; 
-	private boolean enabled;
+	// private boolean enabled;
 	
 	
 	public int getId() {
@@ -63,7 +63,7 @@ public class Usuario {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-
+/*
 	public boolean isEnabled() {
 		return enabled;
 	}
@@ -71,7 +71,7 @@ public class Usuario {
 	public void setEnabled(boolean enabled) {
 		this.enabled = enabled;
 	}
-
+*/
 	/**
 	 * Constructor sin parametros
 	 */

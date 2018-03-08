@@ -1,6 +1,11 @@
 package net.itinajero.app.service;
 
+import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+
+import net.itinajero.app.model.Usuario;
 
 public interface IUsuariosService {
 
@@ -8,7 +13,9 @@ public interface IUsuariosService {
 
 	//List<Partido> buscarPorJornada(int id);
 		
-//	List<Apuesta> buscarTodas();
+	List<Usuario> buscarTodas();
 	//List<String> buscarFechas();
+
+	Page<Usuario> buscarTodas(Pageable page);
 
 }
