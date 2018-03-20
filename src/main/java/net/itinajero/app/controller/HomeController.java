@@ -1,9 +1,17 @@
 package net.itinajero.app.controller;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
@@ -130,6 +138,32 @@ public class HomeController {
 		return "formLogin";
 	}
 	
+	 
+	@RequestMapping(value="/report")
+    @ResponseBody
+//    public void verReporte(HttpServletResponse response) throws JRException, IOException {
+    public String verReporte(Model model,@RequestParam(name = "format",defaultValue = "pdf",required = false) String format) {
+ 
+		//JasperReport report = JasperCompileManager.compileReport("C:\\informes JAsper\\JRXML\\InformeMySql.jrxml");
+		
+		//Reporte unReporte = new Reporte("rptTestB.jrxml");
+		RptProde unReporte = new RptProde();			
+		if(unReporte.generar("rptTest",null,"pdf"))
+			return "ok";
+		else
+			return "mal";
+				
+		
+		//response.setStatus( HttpServletResponse.SC_BAD_REQUEST  ); si error
+		
+     //   model.addAttribute("format", format);
+     //   model.addAttribute("datasource", serviceJornadas.buscarTodas());
+     //   model.addAttribute("AUTOR", "Tutor de programacion");
+
+       // return "customer_report";
+	}
+
+	
 	@ModelAttribute("noticias")
 	public List<Noticia> getNoticias(){
 		return serviceNoticias.buscarUltimas();
@@ -139,6 +173,8 @@ public class HomeController {
 	public List<Banner> getBanners(){
 		return serviceBannners.buscarActivos();
 	}
+	
+	
 	
 	/**
 	 * Metodo para personalizar el Data Binding para los atributos de tipo Date

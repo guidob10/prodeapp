@@ -12,6 +12,7 @@
 	<title>Sistema Prode | Bienvenido</title>
 	<spring:url value="/resources" var="urlPublic" />
 	<spring:url value="/" var="urlRoot" />	
+	<spring:url value="/report" var="reportLink" /> 
 		
 	<link href="${urlPublic}/bootstrap/css/bootstrap.min.css" rel="stylesheet">		
 	<link href="${urlPublic}/bootstrap/css/theme.css" rel="stylesheet">
@@ -122,6 +123,12 @@
 					</div>  
 				</c:forEach>				
 			</div>
+			   
+        	<div>
+            	<a href="${reportLink}">Reporte Fecha PDF</a> <br/>
+            	<a href="${reportLink}?format=xls">Reporte Fecha XLS</a><br/>
+            	<a href="${reportLink}?format=csv">Reporte Fecha CSV</a><br/>
+			</div>			 
 			
 			<div class="page-header">
 				<h2 class="text text-center"><span class="label label-success">Noticias y novedades</span></h2>
