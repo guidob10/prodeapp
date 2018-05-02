@@ -18,9 +18,11 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import net.itinajero.app.formsentity.ApuestaForm;
 import net.itinajero.app.model.Apuesta;
 import net.itinajero.app.model.Noticia;
+import net.itinajero.app.model.Parametro;
 import net.itinajero.app.model.Partido;
 import net.itinajero.app.model.Pelicula;
 import net.itinajero.app.service.IApuestasService;
+import net.itinajero.app.service.IParametrosService;
 import net.itinajero.app.service.IPartidosService;
 import net.itinajero.app.util.Utileria;
 
@@ -34,12 +36,16 @@ public class ApuestasController {
  	private IApuestasService serviceApuestas;
 
     @Autowired
- 	private IPartidosService servicePartidos;    
+ 	private IPartidosService servicePartidos; 
+    
+    @Autowired
+ 	private IParametrosService serviceParametros;     
 	
 	@GetMapping(value = "/edit/{id}")
 	public String editar(@PathVariable("id") int idJornada, Model model) {	
 		List<Apuesta> apuestas;
 		ApuestaForm apuestaForm = new ApuestaForm();
+		List<Parametro> parametros = serviceParametros.buscarTodas();		
 
 		List<Partido> partidos = servicePartidos.buscarPorJornada(idJornada);
 		//buscar apuesta por usuario jornada, si no existe, crear primera.

@@ -1,26 +1,37 @@
 package net.itinajero.app.controller;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
-import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
+
 import net.itinajero.app.model.*;
 import net.itinajero.app.service.*;
 import net.itinajero.app.util.Utileria;
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 
 @Controller
 public class HomeController {
@@ -46,6 +57,9 @@ public class HomeController {
 	// Inyectamos una instancia desde nuestro Root ApplicationContext
 	@Autowired
 	private INoticiasService serviceNoticias;
+	
+	@Autowired
+	private IParametrosService serviceParametros;	
 	
 	private SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
 	
@@ -102,11 +116,7 @@ public class HomeController {
 		}
 		return "home";
 	}
-	/*
-	@Override
-	protected void configure (HttpSecurity http) throws Exception {
-	    http.csrf().disable();
-	}*/	
+
 	
 	/**
 	 * Metodo para ver los detalles y horarios de una pelicula
@@ -137,30 +147,74 @@ public class HomeController {
 	public String mostrarLogin() {
 		return "formLogin";
 	}
+	/*
+	@RequestMapping(value="/downloadPdf")
+    public ResponseEntity<InputStreamResource> downloadPdf()
+    {
+        try
+        {
+            File file = new File("C:\Users\GuidoB\\Desktop\\programacion\\sts-bundle\\workspaceprode\\prodeapp\\src\\main\\resources\\jasperreports\\rptTest_1524882993650.pdf");
+            HttpHeaders respHeaders = new HttpHeaders();
+            MediaType mediaType = MediaType.parseMediaType("application/pdf");
+            respHeaders.setContentType(mediaType);
+            respHeaders.setContentLength(file.length());
+            respHeaders.setContentDispositionFormData("attachment", file.getName());
+            InputStreamResource isr = new InputStreamResource(new FileInputStream(file));
+            return new ResponseEntity<InputStreamResource>(isr, respHeaders, HttpStatus.OK);
+        }
+        catch (Exception e)
+        {
+            String message = "Errore nel download del file "+idForm+".csv; "+e.getMessage();
+            logger.error(message, e);
+            return new ResponseEntity<InputStreamResource>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+    */
 	
-	 
+	
 	@RequestMapping(value="/report")
     @ResponseBody
-//    public void verReporte(HttpServletResponse response) throws JRException, IOException {
-    public String verReporte(Model model,@RequestParam(name = "format",defaultValue = "pdf",required = false) String format) {
- 
-		//JasperReport report = JasperCompileManager.compileReport("C:\\informes JAsper\\JRXML\\InformeMySql.jrxml");
-		
-		//Reporte unReporte = new Reporte("rptTestB.jrxml");
-		RptProde unReporte = new RptProde();			
-		if(unReporte.generar("rptTest",null,"pdf"))
-			return "ok";
-		else
-			return "mal";
-				
-		
-		//response.setStatus( HttpServletResponse.SC_BAD_REQUEST  ); si error
-		
-     //   model.addAttribute("format", format);
-     //   model.addAttribute("datasource", serviceJornadas.buscarTodas());
-     //   model.addAttribute("AUTOR", "Tutor de programacion");
+    public ResponseEntity<byte[]> verReporte(Model model,@RequestParam(name = "format",defaultValue = "pdf",required = false) String format) throws FileNotFoundException {    
 
-       // return "customer_report";
+		List<Parametro> listaParametro  = serviceParametros.buscarTodas();
+		List<Jornada> listaJornada = serviceJornadas.buscarTodas();
+		Parametro parametro = listaParametro.get(0);
+		
+		RptProde unReporte = new RptProde();
+		
+		unReporte.setDs(new JRBeanCollectionDataSource(listaJornada));
+		unReporte.setTitulo("Home");
+		
+		if(unReporte.generar("rptTest",null,"pdf",parametro.getValor())){
+			// C:\Users\GuidoB\Desktop\programacion\sts-bundle\workspaceprode\prodeapp\src\main\resources\jasperreports\rptTest_1523240431050.pdf
+			String ruta = Reporte.extraerRutaReportes();
+
+		    Path path = Paths.get(ruta + File.separator + "rptTest_1525141030566.pdf");
+		    byte[] pdfContents = null;
+		    try {
+		        pdfContents = Files.readAllBytes(path);
+		    } catch (IOException e) {
+		        e.printStackTrace();
+		    }			
+		   // File file = new File(ruta + File.separator + "rptTest_1523240431050.pdf");
+		    HttpHeaders headers = new HttpHeaders();
+		    headers.setContentType(MediaType.parseMediaType("application/pdf"));
+		    String filename = "rptTest_1525141030566.pdf";
+		    headers.setContentDispositionFormData(filename, filename);
+		    headers.setCacheControl("must-revalidate, post-check=0, pre-check=0");
+		    ResponseEntity<byte[]> response = new ResponseEntity<byte[]>(
+		            pdfContents, headers, HttpStatus.OK);
+		    return response;		    
+		    
+
+		}
+		 else{
+
+			 ResponseEntity<byte[]> response = new ResponseEntity<byte[]>(null, null, HttpStatus.FORBIDDEN);
+			 //return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Error Message");
+			    return response;	
+		 }
+
 	}
 
 	

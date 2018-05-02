@@ -42,11 +42,10 @@
 		<web-resource-collection>
 			<web-resource-name>URLs protegidas solo para el rol Editor</web-resource-name>
 			<!-- Define the context-relative URL(s) to be protected -->
-			<url-pattern>/admin/*</url-pattern>
-			<url-pattern>/horarios/*</url-pattern>
-			<url-pattern>/noticias/*</url-pattern>
-			<url-pattern>/peliculas/*</url-pattern>
+			<url-pattern>/admin/*</url-pattern>			
+			<url-pattern>/noticias/*</url-pattern>			
 			<url-pattern>/apuestas/*</url-pattern>
+			<url-pattern>/banners/*</url-pattern>
 		</web-resource-collection>
 		<auth-constraint>
 			<!-- Anyone with this role may access this area -->
@@ -56,17 +55,18 @@
 
 	<security-constraint>
 		<web-resource-collection>
-			<web-resource-name>URLs protegidas solo para el rol Gerente</web-resource-name>
+			<web-resource-name>URLs protegidas solo para el rol jugador</web-resource-name>
 			<!-- Define the context-relative URL(s) to be protected -->
 			<url-pattern>/admin/*</url-pattern>
-			<url-pattern>/banners/*</url-pattern>
+ 			<url-pattern>/banners/*</url-pattern>
 			<url-pattern>/horarios/*</url-pattern>
 			<url-pattern>/noticias/*</url-pattern>			
-			<url-pattern>/peliculas/*</url-pattern>			
+			<url-pattern>/peliculas/*</url-pattern> 
+			<url-pattern>/apuestas/*</url-pattern>					
 		</web-resource-collection>
 		<auth-constraint>
 			<!-- Anyone with this role may access this area -->
-			<role-name>gerente</role-name>
+			<role-name>jugador</role-name>
 		</auth-constraint>
 	</security-constraint>
 

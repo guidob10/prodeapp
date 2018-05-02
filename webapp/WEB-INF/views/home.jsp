@@ -125,9 +125,9 @@
 			</div>
 			   
         	<div>
-            	<a href="${reportLink}">Reporte Fecha PDF</a> <br/>
+            	<a href="${reportLink}"  target="_blank">Reporte Fecha PDF</a> <br/>
             	<a href="${reportLink}?format=xls">Reporte Fecha XLS</a><br/>
-            	<a href="${reportLink}?format=csv">Reporte Fecha CSV</a><br/>
+            	<!--<a href="${reportLink}?format=csv">Reporte Fecha CSV</a><br/> -->
 			</div>			 
 			
 			<div class="page-header">

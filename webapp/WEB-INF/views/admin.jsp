@@ -8,7 +8,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">	
 	<meta name="description" content="">
 	<meta name="author" content="">		
-	<title>ProdeApp Administracion | Bienvenido</title>
+	<title>ProdeApp | Bienvenido</title>
 	<spring:url value="/resources" var="urlPublic" />
 		
 	<link href="${urlPublic}/bootstrap/css/bootstrap.min.css" rel="stylesheet">	
@@ -22,8 +22,7 @@
 	
 	<div class="container theme-showcase" role="main">
 
-	  <div class="jumbotron">        
-        <h3>Administración del Sistema</h3>
+	  <div class="jumbotron">                   
         <p>Bienvenido(a) </p>
       </div>
 
