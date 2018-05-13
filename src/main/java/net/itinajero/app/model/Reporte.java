@@ -10,6 +10,7 @@ import java.util.Map;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Controller;
@@ -18,6 +19,7 @@ import org.springframework.stereotype.Service;
 import com.mysql.jdbc.Connection;
 
 import jdk.nashorn.internal.parser.JSONParser;
+import net.itinajero.app.controller.HomeController;
 import net.itinajero.app.service.IParametrosService;
 import net.itinajero.app.service.IPartidosService;
 import net.itnajero.app.accesodatos.AccesoDB;
@@ -59,6 +61,8 @@ import net.sf.jasperreports.engine.export.JRXlsExporterParameter;
 
 @SuppressWarnings("deprecation")
 public class Reporte {
+	
+	private final static Logger log = Logger.getLogger(HomeController.class);	
 	
 	protected JasperDesign _reportDesign; 
 	protected JasperReport _reportCompile;
@@ -178,12 +182,17 @@ public class Reporte {
         }
 
 // pregunta si esta en webapps, o sea servidor, si no busca en reporte de desarrollo parece.
+        // baja directorios hasta llegar a webapps, ahi agrega nombre de app donde se esta ejecutando y queda en ruta
+        //relativa.
         File f = new File(Reporte.class.getProtectionDomain().getCodeSource().getLocation().getFile());
 
+        log.warn(f.getAbsoluteFile());
+        log.warn(f.getName());
         while ((f != null) && !f.getName().equalsIgnoreCase("webapps")) {
                 dir = f.getName();
                 f = f.getParentFile();
         }
+        log.warn(f.getName()+ "F pos while");
 
         if (f == null)
                 //return  "C:\\Program Files\\Apache Software Foundation\\apache-tomcat-6.0.26\\webapps\\Sigue-Testing\\Inicio" //System.getProperty("user.dir")
@@ -196,7 +205,11 @@ public class Reporte {
                                 + File.separator
                                 + dir
                                 + File.separator
-                                +"reportes"
+                                +"WEB-INF"
+                                + File.separator
+                                +"classes"
+                                + File.separator
+                                +"jasperreports"
                                 + File.separator;
 	}	
 

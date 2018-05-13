@@ -16,7 +16,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.http.HttpHeaders;
@@ -35,6 +35,8 @@ import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 
 @Controller
 public class HomeController {
+	
+	private final static Logger log = Logger.getLogger(HomeController.class);
 	
 	// Inyectamos una instancia desde nuestro Root ApplicationContext
 	@Autowired
@@ -77,6 +79,8 @@ public class HomeController {
 			List<String> listaFechas  = serviceJornadas.buscarFechas();
 			Jornada jornada = serviceJornadas.buscarPorFechaReciente();
 			List<Partido> partidos = servicePartidos.buscarPorJornada(jornada.getId());
+			log.warn("Home Controller inicio");
+
 			
 			//List<String> listaFechass = Utileria.getNextDays(4);
 			
@@ -189,7 +193,7 @@ public class HomeController {
 			// C:\Users\GuidoB\Desktop\programacion\sts-bundle\workspaceprode\prodeapp\src\main\resources\jasperreports\rptTest_1523240431050.pdf
 			String ruta = Reporte.extraerRutaReportes();
 
-		    Path path = Paths.get(ruta + File.separator + "rptTest_1525141030566.pdf");
+		    Path path = Paths.get(ruta + File.separator + "rptTest_1525141721766.pdf");
 		    byte[] pdfContents = null;
 		    try {
 		        pdfContents = Files.readAllBytes(path);
