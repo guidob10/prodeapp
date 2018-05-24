@@ -151,31 +151,7 @@ public class HomeController {
 	public String mostrarLogin() {
 		return "formLogin";
 	}
-	/*
-	@RequestMapping(value="/downloadPdf")
-    public ResponseEntity<InputStreamResource> downloadPdf()
-    {
-        try
-        {
-            File file = new File("C:\Users\GuidoB\\Desktop\\programacion\\sts-bundle\\workspaceprode\\prodeapp\\src\\main\\resources\\jasperreports\\rptTest_1524882993650.pdf");
-            HttpHeaders respHeaders = new HttpHeaders();
-            MediaType mediaType = MediaType.parseMediaType("application/pdf");
-            respHeaders.setContentType(mediaType);
-            respHeaders.setContentLength(file.length());
-            respHeaders.setContentDispositionFormData("attachment", file.getName());
-            InputStreamResource isr = new InputStreamResource(new FileInputStream(file));
-            return new ResponseEntity<InputStreamResource>(isr, respHeaders, HttpStatus.OK);
-        }
-        catch (Exception e)
-        {
-            String message = "Errore nel download del file "+idForm+".csv; "+e.getMessage();
-            logger.error(message, e);
-            return new ResponseEntity<InputStreamResource>(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    }
-    */
-	
-	
+		
 	@RequestMapping(value="/report")
     @ResponseBody
     public ResponseEntity<byte[]> verReporte(Model model,@RequestParam(name = "format",defaultValue = "pdf",required = false) String format) throws FileNotFoundException {    
@@ -189,21 +165,22 @@ public class HomeController {
 		unReporte.setDs(new JRBeanCollectionDataSource(listaJornada));
 		unReporte.setTitulo("Home");
 		
-		if(unReporte.generar("rptTest",null,"pdf",parametro.getValor())){
+		if(unReporte.generar("rptFecha",null,format,parametro.getValor())){
 			// C:\Users\GuidoB\Desktop\programacion\sts-bundle\workspaceprode\prodeapp\src\main\resources\jasperreports\rptTest_1523240431050.pdf
 			String ruta = Reporte.extraerRutaReportes();
-
-		    Path path = Paths.get(ruta + File.separator + "rptTest_1525141721766.pdf");
+			
+		    //Path path = Paths.get(ruta + File.separator + "rptFecha_1525141721766.pdf");
+			Path path = Paths.get(ruta + File.separator + unReporte.getSalida());
 		    byte[] pdfContents = null;
 		    try {
 		        pdfContents = Files.readAllBytes(path);
 		    } catch (IOException e) {
 		        e.printStackTrace();
 		    }			
-		   // File file = new File(ruta + File.separator + "rptTest_1523240431050.pdf");
+
 		    HttpHeaders headers = new HttpHeaders();
 		    headers.setContentType(MediaType.parseMediaType("application/pdf"));
-		    String filename = "rptTest_1525141030566.pdf";
+		    String filename = unReporte.getSalida();
 		    headers.setContentDispositionFormData(filename, filename);
 		    headers.setCacheControl("must-revalidate, post-check=0, pre-check=0");
 		    ResponseEntity<byte[]> response = new ResponseEntity<byte[]>(

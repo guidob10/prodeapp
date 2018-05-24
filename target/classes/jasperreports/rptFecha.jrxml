@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="rptTest" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="rptFecha" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
@@ -9,12 +9,12 @@
 	</queryString>
 	<field name="fechaInicio" class="java.util.Date"/>
 	<variable name="variable1" class="java.lang.String">
-		<initialValueExpression><![CDATA["asd"]]></initialValueExpression>
+		<initialValueExpression><![CDATA["Resultado de Fecha"]]></initialValueExpression>
 	</variable>
 	<title>
 		<band height="48">
 			<textField>
-				<reportElement x="33" y="0" width="79" height="24"/>
+				<reportElement x="33" y="0" width="522" height="24"/>
 				<box>
 					<topPen lineWidth="0.75"/>
 					<leftPen lineWidth="0.75"/>
@@ -22,54 +22,41 @@
 					<rightPen lineWidth="0.75"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="9"/>
+					<font size="14" isBold="true"/>
 				</textElement>
-				<textFieldExpression class="java.lang.String"><![CDATA["INVENTARIO HEADER"]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="112" y="0" width="100" height="24"/>
-				<textElement/>
-				<textFieldExpression class="java.lang.String"><![CDATA[$V{variable1}]]></textFieldExpression>
+				<textFieldExpression class="java.lang.String"><![CDATA["PRODEAPP"]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="33" y="24" width="79" height="24"/>
-				<box>
-					<topPen lineWidth="0.75"/>
-					<leftPen lineWidth="0.75"/>
-					<bottomPen lineWidth="0.75"/>
-					<rightPen lineWidth="0.75"/>
-				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="9"/>
-				</textElement>
-				<textFieldExpression class="java.lang.String"><![CDATA[$P{titulo}]]></textFieldExpression>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$V{variable1}]]></textFieldExpression>
 			</textField>
 		</band>
 	</title>
 	<detail>
 		<band height="25">
 			<textField>
-				<reportElement x="33" y="0" width="79" height="24"/>
+				<reportElement x="33" y="0" width="79" height="25"/>
 				<box>
-					<topPen lineWidth="0.75"/>
-					<leftPen lineWidth="0.75"/>
-					<bottomPen lineWidth="0.75"/>
-					<rightPen lineWidth="0.75"/>
+					<topPen lineWidth="0.0"/>
+					<leftPen lineWidth="0.0"/>
+					<bottomPen lineWidth="0.0"/>
+					<rightPen lineWidth="0.0"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="9"/>
 				</textElement>
-				<textFieldExpression class="java.lang.String"><![CDATA["INVENTARIO"]]></textFieldExpression>
+				<textFieldExpression class="java.lang.String"><![CDATA["Fecha: "]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="112" y="0" width="100" height="25"/>
-				<textElement/>
+				<textElement verticalAlignment="Middle"/>
 				<textFieldExpression class="java.util.Date"><![CDATA[$F{fechaInicio}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>
 	<columnFooter>
-		<band height="45">
+		<band height="24">
 			<textField>
 				<reportElement x="33" y="0" width="79" height="24"/>
 				<box>
@@ -81,7 +68,7 @@
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="9"/>
 				</textElement>
-				<textFieldExpression class="java.lang.String"><![CDATA["INVENTARIO FOOTER"]]></textFieldExpression>
+				<textFieldExpression class="java.lang.String"><![CDATA["2018 Prode"]]></textFieldExpression>
 			</textField>
 		</band>
 	</columnFooter>

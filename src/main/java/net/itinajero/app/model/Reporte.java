@@ -141,20 +141,6 @@ public class Reporte {
 	protected void agregarParametrosDefault(){
 		_parametros.put("RUTAREPORTES", _rutaReportes);
 	}
-/*gbc
-	@SuppressWarnings("unchecked")
-	protected void agregarParametrosJson() throws IOException, ParseException{
-		if (_rutaJson == null) return;
-		
-		JSONParser jsonParser = new JSONParser();
-		FileReader reader = new FileReader(_rutaJson);
-		JSONObject json = (JSONObject) jsonParser.parse(reader);
-
-		_parametros.putAll(json);
-
-			
-		
-	} */
 
 	
 	protected void abrirReportDesign() throws Exception{
@@ -192,7 +178,7 @@ public class Reporte {
                 dir = f.getName();
                 f = f.getParentFile();
         }
-        log.warn(f.getName()+ "F pos while");
+  
 
         if (f == null)
                 //return  "C:\\Program Files\\Apache Software Foundation\\apache-tomcat-6.0.26\\webapps\\Sigue-Testing\\Inicio" //System.getProperty("user.dir")
@@ -201,6 +187,7 @@ public class Reporte {
                                // +"reportes"
                               //  + File.separator;
         else
+        	    log.warn(f.getName()+ "F pos while");
                 return  f.getAbsolutePath()
                                 + File.separator
                                 + dir
