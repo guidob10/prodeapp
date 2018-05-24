@@ -61,7 +61,10 @@ public class HomeController {
 	private INoticiasService serviceNoticias;
 	
 	@Autowired
-	private IParametrosService serviceParametros;	
+	private IParametrosService serviceParametros;
+	
+	@Autowired
+	private IUsuariosService serviceUsuarios;		
 	
 	private SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
 	
@@ -208,6 +211,20 @@ public class HomeController {
 	public List<Banner> getBanners(){
 		return serviceBannners.buscarActivos();
 	}
+	
+	
+	@RequestMapping(value = "/perfil/{nombreusuario}")
+	public String mostrarUsuario(@PathVariable("nombreusuario") String nombreUsuario, Model model) throws Exception {
+		// TODO - Buscar en la base de datos el usuario.		
+		Usuario usuarioPerfil  = serviceUsuarios.buscarDatosPerfil(nombreUsuario);
+		if (usuarioPerfil == null)
+			return "perfilInexistente";
+		else{
+			model.addAttribute("nombre", usuarioPerfil.getNombre());
+			model.addAttribute("email", usuarioPerfil.getEmail());	
+		return "perfil";
+		}
+	}	
 	
 	
 	

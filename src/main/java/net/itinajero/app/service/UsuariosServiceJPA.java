@@ -30,7 +30,7 @@ public class UsuariosServiceJPA implements IUsuariosService{
 	public Page<Usuario> buscarTodas(Pageable page) {
 		return usuariosRepo.findAll(page);
 	}	
-     /*
+      /*
     @Override
     public UserDetails loadUserByUsername(String username) {
         Usuario usuario = usuariosRepo.findByUsername(username);
@@ -39,6 +39,15 @@ public class UsuariosServiceJPA implements IUsuariosService{
         }
         return new MyUserPrincipal(usuario);
     }
-    
     */
+	
+	@Override
+	public Usuario buscarDatosPerfil(String username) throws Exception{
+		Usuario usuario = usuariosRepo.findByUsername(username);
+		//if (usuario == null) {
+		//	throw new Exception(username);
+		//}
+		
+		return (usuario);
+	}
 }

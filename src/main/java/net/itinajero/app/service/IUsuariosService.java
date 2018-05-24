@@ -18,4 +18,6 @@ public interface IUsuariosService {
 
 	Page<Usuario> buscarTodas(Pageable page);
 
+	Usuario buscarDatosPerfil(String username) throws Exception;
+
 }
