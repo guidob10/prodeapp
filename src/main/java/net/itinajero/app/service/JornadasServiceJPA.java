@@ -6,6 +6,8 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -24,12 +26,12 @@ public class JornadasServiceJPA implements IJornadasService {
     // Inyectamos una instancia desde nuestro Root ApplicationContext.
     @Autowired
 	private JornadasRepository jornadasRepo;
-	/*
+	 
 	@Override
-	public void insertar(Pelicula pelicula) {
-		peliculasRepo.save(pelicula);
+	public void insertar(Jornada jornada) {
+		jornadasRepo.save(jornada);
 	}
-
+/*
 	@Override
 	public List<Pelicula> buscarPorFecha(Date fecha) {		
 		List<Pelicula> peliculas = null;
@@ -49,6 +51,22 @@ public class JornadasServiceJPA implements IJornadasService {
 	public List<Jornada> buscarTodas() {
 		return jornadasRepo.findAll();		
 	}
+	
+	@Override
+	public Jornada buscarPorId(int idJornada) {	
+		Optional<Jornada> optional = jornadasRepo.findById(idJornada);
+		if (optional.isPresent())
+			return optional.get();
+		return null;
+	}	
+	
+
+	@Override
+	public void eliminar(int idJornada) {
+		//peliculasRepo.delete(idPelicula); // Spring 4.3
+		jornadasRepo.deleteById(idJornada);
+		
+	}	
 /*
 	@Override
 	public List<Pelicula> buscarActivas() {
@@ -58,20 +76,6 @@ public class JornadasServiceJPA implements IJornadasService {
 	}
 
 		
-	@Override
-	public Pelicula buscarPorId(int idPelicula) {	
-		Optional<Pelicula> optional = peliculasRepo.findById(idPelicula);
-		if (optional.isPresent())
-			return optional.get();
-		return null;
-	}
-
-	@Override
-	public void eliminar(int idPelicula) {
-		//peliculasRepo.delete(idPelicula); // Spring 4.3
-		peliculasRepo.deleteById(idPelicula);
-		
-	}
 */
 	@Override
 	public Page<Jornada> buscarTodas(Pageable page) {

@@ -5,9 +5,12 @@ import java.text.Format;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.LinkedList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import net.itinajero.app.model.Club;
 import net.itinajero.app.model.Jornada;
 import net.itinajero.app.repository.ClubesRepository;
 import net.itinajero.app.repository.JornadasRepository;
@@ -129,4 +132,19 @@ public class ClubesServiceJPA implements IClubesService {
 		
 	}
 	 */
+
+	@Override
+	public List<Club> buscarClubes() {
+		// Nota: Esta lista podria ser obtenida de una BD
+		List<Club> clubes = new LinkedList<>();
+		clubes = clubesRepo.findAll(); 
+/*
+		generos.add("Accion");
+		generos.add("Aventura");
+		generos.add("Clasicas");
+		generos.add("Comedia Romantica");
+ */
+				
+		return clubes;
+	}
 }

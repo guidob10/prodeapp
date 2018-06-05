@@ -5,9 +5,7 @@
 <nav class="navbar navbar-inverse navbar-fixed-top">
 	<div class="container">
 	
-			
-
-			
+						
 		<c:choose>
 			<c:when test="${usuario.hasRole('editor')}">
 				<div class="navbar-header">
@@ -21,6 +19,8 @@
 				</div>
 				<div id="navbar" class="navbar-collapse collapse">
 					<ul class="nav navbar-nav">
+	            		<li><a href="${urlRoot}jornadas/indexPaginate?page=0">Jornada/Apuestas</a></li>
+	            		<li><a href="${urlRoot}partidos/indexPaginate?page=0">Partidos</a></li>						
 						<li><a href="${urlRoot}noticias/index">Noticias</a></li>
 						<li><a href="${urlRoot}banners/index">Banner</a></li>
 						<li><a href="${urlRoot}usuarios/index">Usuarios</a></li>						

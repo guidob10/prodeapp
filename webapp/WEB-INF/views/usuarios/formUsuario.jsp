@@ -21,8 +21,11 @@
 
 <body>
 
-	<jsp:include page="../includes/menu.jsp"></jsp:include>
-	
+	<!--  da error el menu, debe ser porque recupera el usuario, y no tiene rol..., o porque se llama varaible usuario, como en jsp -->
+	 <jsp:include page="../includes/menu.jsp"></jsp:include>
+	 
+	 <!--agregar combo rol/perfil -->
+		
 	<div class="container theme-showcase" role="main">
 
 		<div class="page-header">
@@ -43,11 +46,8 @@
 			</div>
 		</spring:hasBindErrors>
 
-      <form:form action="${urlForm}" method="POST" enctype="multipart/form-data" modelAttribute="usuario" >
-      
-      	<!-- Ya traemos el objeto pelicula, por lo tanto tambien traemos la imagen. Podemos aprovechar que ya traemos
-				la imagen de la pelicula. La mostramos en un tag <img>. Solo llamamos ${pelicula.imagen}
-			-->      		 	
+      <form:form action="${urlForm}" method="POST" modelAttribute="usuarioform" >
+          		 	
         <div class="row">
           <div class="col-sm-3">
             <div class="form-group">
@@ -61,8 +61,7 @@
           <div class="col-sm-3">
             <div class="form-group">
               <label for="titulo">Nombre</label>
-              <form:hidden class="form-control" path="id"/>
-              
+              <form:hidden class="form-control" path="id"/>             
               <form:input type="text" class="form-control" path="nombre" id="nombre" required="required" />
             </div>  
           </div>
@@ -84,11 +83,18 @@
                   
           <div class="col-sm-3">
             <div class="form-group">
-              <label for="fechaEstreno">Constraseña</label>             
+              <label for="password">Constrasena</label>             
               <form:input type="text" class="form-control" path="password" id="password" required="required"  />
             </div>  
-          </div>			 			 
-          
+          </div>	
+          <!--  .. recuperar perfiles hardcodeados, e insertar en tabla de perfil -->
+          <div class="col-sm-3">
+            <div class="form-group">
+              <label for="jornada" class="control-label">Rol</label>                                           
+				<form:select id="perfil" path="perfil" itemValue="perfil" itemLabel="perfil" class="form-control" items="${roles}"/>                           
+            </div> 
+          </div>            		 			
+         
         </div>
         
   
@@ -107,11 +113,6 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 	<script src="${urlPublic}/bootstrap/js/bootstrap.min.js"></script>
 	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-   <script>
-      $(function () {
-         $("#fechaEstreno").datepicker({dateFormat: 'dd-mm-yy'});
-      }
-      );
-   </script>
+
 </body>
 </html>

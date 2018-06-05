@@ -21,6 +21,6 @@ public interface PartidosRepository extends JpaRepository<Partido, Integer> {
 	 //public List<Jornada> findByEstatus_OrderByTitulo(String estatus);
  //	public List<Partido> findByJornada(int jornada);
 	public List<Partido> findByJornada_Id(int idJornada);
-	
+	public Partido findById(int idPartido);
 
 }

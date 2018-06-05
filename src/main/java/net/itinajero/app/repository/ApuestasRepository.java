@@ -19,6 +19,8 @@ public interface ApuestasRepository extends JpaRepository<Apuesta, Integer> {
 	// ver como traer por array		
 	public Apuesta findByPartido_Id(int idPartido);
 	
+	public Apuesta findByPartido_IdAndUsuario_Id(int idPartido, int idUsuario);
+	
 	
 
 }

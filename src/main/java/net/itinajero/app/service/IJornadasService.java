@@ -11,13 +11,15 @@ import net.itinajero.app.model.Jornada;
 
 public interface IJornadasService {
 	
-	//void insertar(Jornada jornada);	
+ 	
 	List<Jornada> buscarTodas();
 	List<String> buscarFechas();
 	Jornada buscarPorFechaReciente();
 	Jornada buscarPorFecha(Date fecha);
 	Page<Jornada> buscarTodas(Pageable page);
-	 
+	void insertar(Jornada jornada);
+	Jornada buscarPorId(int idJornada);
+	void eliminar(int idJornada);
 	/*
 	Jornada buscarPorId(int idJornada);
 	List<String> buscarGeneros();
@@ -25,6 +27,6 @@ public interface IJornadasService {
     List<Jornada> buscarActivas();	
 	List<Jornada> buscarPorFecha(Date fecha);
 	Page<Jornada> buscarTodas(Pageable page);	
-	void eliminar(int idJornada);
+	
 	*/
 }

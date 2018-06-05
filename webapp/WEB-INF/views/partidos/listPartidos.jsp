@@ -1,6 +1,7 @@
 <%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <!DOCTYPE html>
 <html lang="en">
 	<head>
@@ -36,15 +37,21 @@
 	        <table class="table table-hover table-striped table-bordered">
 	          <tr>
 	              <th>Id</th>
+	              <th>Jornada</th>
 	              <th>Fecha Partido</th>
+	              <th>Local</th>
+	              <th>Visita</th>	              
 	              <th>Puntos Local</th>
 				  <th>Puntos Visita</th>
 	          </tr>
-	
-				<c:forEach var="partido" items="${partidos.content}">
-					<tr>
+ 
+			 	<c:forEach var="partido" items="${partidos.content}">  						 
+					<tr>					
 						<td>${partido.id}</td>
+						<td>${partido.jornada.id}</td>
 						<td>${partido.fechaPartido}</td>
+						<td>${partido.local.nombreClub}</td>
+						<td>${partido.visita.nombreClub}</td>
 						<td>${partido.puntosLocal}</td>
 						<td>${partido.puntosVisita}</td>
 
@@ -53,7 +60,7 @@
 							<a href="${urlPartidos}/delete/${partido.id}" onclick='return confirm("¿Estas seguro?")' class="btn btn-danger btn-sm" role="button" title="Eliminar"><span class="glyphicon glyphicon-trash"></span></a>
 						</td>
 					</tr>
-				</c:forEach>
+				</c:forEach> 
 			</table>
 		</div>
 		
@@ -75,5 +82,11 @@
 	<!-- Placed at the end of the document so the pages load faster -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 	<script src="${urlPublic}/bootstrap/js/bootstrap.min.js"></script>
+    <script>
+      $(function () {
+         $("#fechaPartido").datepicker({dateFormat: 'dd-mm-yy'});
+      }
+      );
+    </script>	
 </body>
 </html>

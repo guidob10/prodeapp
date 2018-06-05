@@ -9,9 +9,9 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta name="description" content="">
 	<meta name="author" content="">
-	<title>Creacion de Peliculas</title>
+	<title>Creacion de Partido</title>
 	<spring:url value="/resources" var="urlPublic" />
-	<spring:url value="/peliculas/save" var="urlForm" />
+	<spring:url value="/partidos/save" var="urlForm" />
 	
 	<link href="${urlPublic}/bootstrap/css/bootstrap.min.css" rel="stylesheet">	
 	<link href="${urlPublic}/bootstrap/css/theme.css" rel="stylesheet">
@@ -26,10 +26,10 @@
 	<div class="container theme-showcase" role="main">
 
 		<div class="page-header">
-          <h3 class="blog-title"><span class="label label-success">Datos de la Pelicula</span></h3>
+          <h3 class="blog-title"><span class="label label-success">Datos de Partido</span></h3>
       </div>
 
-		<spring:hasBindErrors name="pelicula">
+		<spring:hasBindErrors name="partido">
 			<div class='alert alert-danger' role='alert'>
 			Por favor corrija los siguientes errores:
 				<ul>
@@ -43,122 +43,78 @@
 			</div>
 		</spring:hasBindErrors>
 
-      <form:form action="${urlForm}" method="POST" enctype="multipart/form-data" modelAttribute="pelicula" >
+      <form:form action="${urlForm}" method="POST"   modelAttribute="partido" >
       
-      	<!-- Ya traemos el objeto pelicula, por lo tanto tambien traemos la imagen. Podemos aprovechar que ya traemos
-				la imagen de la pelicula. La mostramos en un tag <img>. Solo llamamos ${pelicula.imagen}
-			-->      		 	
-        <div class="row">
-          <div class="col-sm-3">
-            <div class="form-group">
-              <img class="img-rounded" src="${urlPublic}/images/${pelicula.imagen}" title="${pelicula.titulo}" width="150" height="200">
-            </div>  
-          </div>
-        </div>
-        
         <!-- Inician los inputs del form -->
         <div class="row">
           <div class="col-sm-3">
             <div class="form-group">
-              <label for="titulo">Título</label>
-              <form:hidden class="form-control" path="id"/>
-              <form:hidden class="form-control" path="detalle.id"/>
-              <form:input type="text" class="form-control" path="titulo" id="titulo" required="required" />
-            </div>  
-          </div>
-          <div class="col-sm-3">
-            <div class="form-group">
-              <label for="duracion">Duracion</label>
-              <form:input type="text" class="form-control" path="duracion" id="duracion" required="required"/>
-            </div>  
-          </div>
-          <div class="col-sm-3">
-            <div class="form-group">
-              <label for="clasificacion" class="control-label">Clasificacion</label>              
-              <form:select id="clasificacion" path="clasificacion" class="form-control">
-                <form:option value="A">Clasificacion A</form:option>
-                <form:option value="B">Clasificacion B</form:option>
-                <form:option value="C">Clasificacion C</form:option>                  
-              </form:select>             
-            </div> 
-          </div>
-          <div class="col-sm-3">
-            <div class="form-group">
-              <label for="genero" class="control-label">Genero</label>              
-              <form:select id="genero" path="genero" class="form-control" items="${generos}"/>            
-            </div> 
-          </div>         
-        </div>
-
-        <div class="row">
-        
-          <div class="col-sm-3">
-            <div class="form-group">
-              <label for="estatus" class="control-label">Estatus</label>              
-              <form:select id="estatus" path="estatus" class="form-control">
-                <form:option value="Activa">Activa</form:option>
-                <form:option value="Inactiva">Inactiva</form:option>                                 
-              </form:select>             
-            </div> 
-          </div>    
-        
-          <div class="col-sm-3">
-            <div class="form-group">
-              <label for="fechaEstreno">Fecha Estreno</label>             
-              <form:input type="text" class="form-control" path="fechaEstreno" id="fechaEstreno" required="required"  />
-            </div>  
-          </div>
-			 			 
-          <div class="col-sm-3">
-            <div class="form-group">
-              <label for="imagen">Imagen</label>
-              <input type="file" id="archivoImagen" name="archivoImagen" />              
-              <form:hidden path="imagen" />
-              <p class="help-block">Imagen de la pelicula</p>
-            </div> 
+              <form:hidden path="id"/>
+              <label for="local" class="control-label">Local</label>              
+              <form:select id="local" path="local.id" itemLabel="nombreClub" itemValue="id" 
+              				class="form-control" items="${clubes}"/>                   
+            </div>          
           </div>
           
-        </div>
+          <div class="col-sm-3">
+            <div class="form-group">
+              <form:hidden path="id"/>
+              <label for="visita" class="control-label">Visita</label>              
+              <form:select id="visita" path="visita.id" itemLabel="nombreClub" itemValue="id" 
+              				class="form-control" items="${clubes}"/>                   
+            </div> 
+            
+          </div>
+        </div>    
         
+        <div class="row">
+          <div class="col-sm-3">
+            <div class="form-group">
+              <label for="local" class="control-label">Puntos Local</label>              
+              <form:input type="text" class="form-control" path="puntosLocal" id="puntoslocal" required="required"/>             
+            </div>            
+          </div>
+         
+          <div class="col-sm-3">
+            <div class="form-group">
+              <label for="local" class="control-label">Puntos Visita</label>              
+              <form:input type="text" class="form-control" path="puntosVisita" id="puntosvisita" required="required"/>                 
+            </div>             
+          </div>
+        </div>            
+
+        <div class="row">
+          <div class="col-sm-3">
+            <div class="form-group">
+              <label for="jornada" class="control-label">Jornada</label>                             
+              <!-- <form:select id="jornada" path="jornada.id" itemValue="id" class="form-control" items="${jornadas}"/> -->
+              	<form:hidden path="id"/>  
+				<form:select id="jornada" path="jornada.id" itemValue="id" itemLabel="id" class="form-control" items="${jornadas}"/>                           
+            </div> 
+          </div>   
+          <div class="col-sm-3">
+            <div class="form-group">
+              <label for="fechaPartido">Fecha Partido</label>             
+              <form:input type="text" class="form-control" path="fechaPartido" id="fechaPartido" required="required"  />
+            </div>
+          </div>                        
+                        
+          <div class="col-sm-3">
+            <div class="form-group">
+            
+            </div> 
+          </div>    
+                  
+        </div>
+        <!--  
         <div class="page-header">
           <h3 class="blog-title"><span class="label label-success">Detalles</span></h3>
         </div>
-        
-        <div class="row">
-          <div class="col-sm-3">
-            <div class="form-group">
-              <label for="director">Director</label>
-              <form:input type="text" class="form-control" path="detalle.director" id="director" required="required" />
-            </div>  
-          </div>
-          <div class="col-sm-3">
-            <div class="form-group">
-              <label for="actores">Actores</label>
-              <form:input type="text" class="form-control" path="detalle.actores" id="actores" required="required" />
-            </div>  
-          </div>
-
-          <div class="col-sm-6">
-            <div class="form-group">
-              <label for="trailer">URL del Trailer (Youtube)</label>
-              <form:input type="text" class="form-control" path="detalle.trailer" id="trailer" placeholder="URL completa del video de YOUTUBE" required="required" />
-            </div>  
-          </div> 
-        </div> 
-
-        <div class="row">
-          <div class="col-sm-6">
-            <div class="form-group">
-              <label for="sinopsis">Sinopsis</label>
-              <form:textarea class="form-control" rows="5" path="detalle.sinopsis" id="sinopsis"></form:textarea>
-            </div> 
-          </div> 
-        </div>
-
+ 		-->
         <button type="submit" class="btn btn-danger" >Guardar</button>
       </form:form> 
 
-		<hr class="featurette-divider">
+	  <hr class="featurette-divider">
 
       <jsp:include page="../includes/footer.jsp"></jsp:include>		
 
@@ -172,7 +128,7 @@
 	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
    <script>
       $(function () {
-         $("#fechaEstreno").datepicker({dateFormat: 'dd-mm-yy'});
+         $("#fechaPartido").datepicker({dateFormat: 'dd-mm-yy'});
       }
       );
    </script>

@@ -38,7 +38,7 @@
 	        <table class="table table-hover table-striped table-bordered">
 	          <tr>
 	              <th>Id</th>
-	              <th>Fecha Inicio </th>
+	              <th>Fecha</th>
 	              <th>Local</th>
 	              <th>Visita</th>
 	              <th>Ganador</th>
@@ -58,8 +58,11 @@
 	                 		<form:radiobutton path="apuestas[${us.index}].ganador" value="1"/> Visita              								       
 						</td>
 						<form:input type="hidden"  path="apuestas[${us.index}].id"/>
-						<form:input type="hidden"  path="apuestas[${us.index}].partido.id"/>	
-						<form:input type="hidden" path="apuestas[${us.index}].usuario.id" value="1"  />											
+						<form:input type="hidden"  path="apuestas[${us.index}].partido.id"/>
+						<form:input type="hidden"  path="apuestas[${us.index}].partido.fechaPartido"/>		
+						<form:input type="hidden" path="apuestas[${us.index}].usuario.id" value="<%
+							 	%>"
+  						/>										
 					</tr>	
 				</c:forEach>			
 			</table>

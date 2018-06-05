@@ -1,10 +1,13 @@
 package net.itinajero.app.controller;
 
+import java.security.Principal;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
+
+import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
@@ -21,9 +24,11 @@ import net.itinajero.app.model.Noticia;
 import net.itinajero.app.model.Parametro;
 import net.itinajero.app.model.Partido;
 import net.itinajero.app.model.Pelicula;
+import net.itinajero.app.model.Usuario;
 import net.itinajero.app.service.IApuestasService;
 import net.itinajero.app.service.IParametrosService;
 import net.itinajero.app.service.IPartidosService;
+import net.itinajero.app.service.IUsuariosService;
 import net.itinajero.app.util.Utileria;
 
 
@@ -39,20 +44,25 @@ public class ApuestasController {
  	private IPartidosService servicePartidos; 
     
     @Autowired
- 	private IParametrosService serviceParametros;     
+ 	private IParametrosService serviceParametros;
+    
+	@Autowired
+	private IUsuariosService serviceUsuarios;	    
 	
 	@GetMapping(value = "/edit/{id}")
-	public String editar(@PathVariable("id") int idJornada, Model model) {	
+	public String editar(@PathVariable("id") int idJornada, Model model, Principal user) throws Exception {	
 		List<Apuesta> apuestas;
 		ApuestaForm apuestaForm = new ApuestaForm();
-		List<Parametro> parametros = serviceParametros.buscarTodas();		
+		// List<Parametro> parametros = serviceParametros.buscarTodas();		
 
 		List<Partido> partidos = servicePartidos.buscarPorJornada(idJornada);
 		//buscar apuesta por usuario jornada, si no existe, crear primera.
-		apuestas = serviceApuestas.buscarPorPartidos(partidos);		
 		
-	 	if (apuestas == null || apuestas.isEmpty()){
-			//apuestas = new ArrayList<Apuesta>();			
+		Usuario usuario  = serviceUsuarios.buscarDatosPerfil(user.getName());
+		
+		apuestas = serviceApuestas.buscarPorPartidos(partidos, usuario);		
+		
+	 	if (apuestas == null || apuestas.isEmpty()){		
 
 			for (Partido partido : partidos) {
 				Apuesta apuesta = new Apuesta();
@@ -69,14 +79,20 @@ public class ApuestasController {
     	
 	@PostMapping(value = "/save")
 	public String guardar(@ModelAttribute ApuestaForm apuestaForm, BindingResult result, Model model,
-			RedirectAttributes attributes) {	
+			RedirectAttributes attributes, Principal user) throws Exception {	
 		System.out.println(apuestaForm);
 		System.out.println(apuestaForm.getApuestas());
 		List<Apuesta> apuestas = apuestaForm.getApuestas();
-		
+
+//ver si no se puede recuperar user de antes
+		Usuario usuario  = serviceUsuarios.buscarDatosPerfil(user.getName());
+		Date todayDate = new Date();
 		for (Apuesta apuesta : apuestas){
-			
-			serviceApuestas.insertar(apuesta);
+			apuesta.setUsuario(usuario);
+			//valido que partido sea anterior a dia de la fecha
+			if (apuesta.getPartido().getFechaPartido().before((todayDate))){
+				serviceApuestas.insertar(apuesta);
+			}
 		}				
 		
 		attributes.addFlashAttribute("msg", "Apuesta Realizada!");

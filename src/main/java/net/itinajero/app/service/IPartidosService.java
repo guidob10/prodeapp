@@ -17,9 +17,11 @@ public interface IPartidosService {
 	//Jornada buscarPorFechaReciente();
 
 	void eliminar(int idPartido);
-	 
+
+	void insertar(Partido partido);
+	Partido buscarPorId(int idPartido);	 
 	/*
-	Jornada buscarPorId(int idJornada);
+
 	List<String> buscarGeneros();
 	// Con este metodo traemos las peliculas Activas. Para formar el select de Peliculas del FORM de nuevo Horario.
     List<Jornada> buscarActivas();	

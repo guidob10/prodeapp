@@ -1,12 +1,14 @@
 package net.itinajero.app.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import net.itinajero.app.model.Jornada;
 import net.itinajero.app.model.Pelicula;
 import net.itinajero.app.model.Usuario;
 import net.itinajero.app.repository.UsuariosRepository;
@@ -49,5 +51,27 @@ public class UsuariosServiceJPA implements IUsuariosService{
 		//}
 		
 		return (usuario);
+	}
+
+	@Override
+	public void eliminar(int idUsuario) {
+		usuariosRepo.deleteById(idUsuario);	
+		
+	}
+
+	@Override
+	public void insertar(Usuario usuario) {
+		usuariosRepo.save(usuario);
+		
+	}
+
+	@Override
+	public Usuario buscarPorId(int idUsuario) {
+		// TODO Auto-generated method stub
+		//return usuariosRepo.findById(idUsuario);
+		Optional<Usuario> optional = usuariosRepo.findById(idUsuario);
+		if (optional.isPresent())
+			return optional.get();
+		return null;		
 	}
 }
