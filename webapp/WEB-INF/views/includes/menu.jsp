@@ -59,7 +59,8 @@
 				<div id="navbar" class="navbar-collapse collapse">
 					<ul class="nav navbar-nav">											   					   					   
 					   <li><a href="${urlRoot}about">Acerca</a></li>
-					   <li><a href="${urlRoot}admin/index">Login</a></li>					   
+					   <li><a href="${urlRoot}admin/index">Login</a></li>	
+					   <li><a href="${urlRoot}registro/registrar">Registro</a></li>					   
 					</ul>
 				</div>
 			</c:otherwise>			
