@@ -1,6 +1,5 @@
 package net.itinajero.app.controller;
 
-import java.security.NoSuchAlgorithmException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -19,24 +18,18 @@ import net.itinajero.app.model.Jornada;
 import net.itinajero.app.model.Partido;
 import net.itinajero.app.model.Pelicula;
 import net.itinajero.app.model.Usuario;
-import net.itinajero.app.model.UsuarioPerfil;
 import net.itinajero.app.service.IUsuariosPerfilService;
 import net.itinajero.app.service.IUsuariosService;
 
-
+//saco requestmapp
 @Controller
-@RequestMapping(value="/usuarios")
-public class UsuariosController {
+public class UsuariosPerfilController {
 	
 	// Inyectamos una instancia desde nuestro Root ApplicationContext
 	@Autowired
-	private IUsuariosService serviceUsuarios;
+	private IUsuariosPerfilService serviceUsuariosPerfil;
 	
-	//Roles de usuario
-	@Autowired
-	private IUsuariosPerfilService serviceUsuariosPerfil;	
-	
-
+/*
 	@GetMapping(value = "/index")
 	public String mostrarIndex(Model model) {
 	//	List<Apuesta> lista = serviceApuestas.buscarTodas();
@@ -74,7 +67,7 @@ public class UsuariosController {
 	
 	@PostMapping(value = "/save")
 	public String guardar(@ModelAttribute Usuario usuarioform, BindingResult result, Model model,
-			  RedirectAttributes attributes) throws NoSuchAlgorithmException {	
+			  RedirectAttributes attributes) {	
 		
 		if (result.hasErrors()){
 			
@@ -82,16 +75,16 @@ public class UsuariosController {
 			return "usuarios/formUsuario";
 		}	
 				    	
-		serviceUsuarios.editar(usuarioform);
+		serviceUsuarios.insertar(usuarioform);
 		attributes.addFlashAttribute("msg", "Los datos de Usuario fueron guardados!");
 			
 		return "redirect:/usuarios/index";		
 	}	
 	
-	@ModelAttribute("roles")
-	public List<UsuarioPerfil> getPerfiles(){
-		return serviceUsuariosPerfil.buscarTodas();
+	@ModelAttribute("clubes")
+	public List<Club> getRoles(){
+		return serviceRoles.buscarRoles();
 	}		
-	
+	*/
 
 }

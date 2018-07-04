@@ -1,5 +1,6 @@
 package net.itinajero.app.service;
 
+import java.security.NoSuchAlgorithmException;
 import java.util.List;
 
 import org.springframework.data.domain.Page;
@@ -20,9 +21,14 @@ public interface IUsuariosService {
 	Page<Usuario> buscarTodas(Pageable page);
 	
 	void eliminar(int idUsuario);
-	void insertar(Usuario idUsuario);
+	void insertar(Usuario idUsuario) throws NoSuchAlgorithmException;
+	void editar(Usuario idUsuario) throws NoSuchAlgorithmException;
 	Usuario buscarPorId(int idUsuario);	 	
 
 	Usuario buscarDatosPerfil(String username) throws Exception;
+	
+	//void registrar(Usuario usuario);
+
+	//Usuario validarUsuario(Login login);	
 
 }

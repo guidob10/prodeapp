@@ -30,7 +30,7 @@
         		<div class='alert alert-success' role='alert'>${msg}</div>
         </c:if>	
               
-        <a href="${urlUsuarios}/create" class="btn btn-success" role="button" title="Nuevo Usuario" >Nuevo</a><br><br>        
+        <!--<a href="${urlUsuarios}/create" class="btn btn-success" role="button" title="Nuevo Usuario" >Nuevo</a><br><br> -->        
          
         <div class="table-responsive">
 	        <table class="table table-hover table-striped table-bordered">

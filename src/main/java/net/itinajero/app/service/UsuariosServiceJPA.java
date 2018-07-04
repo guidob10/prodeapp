@@ -1,5 +1,7 @@
 package net.itinajero.app.service;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.List;
 import java.util.Optional;
 
@@ -21,6 +23,9 @@ public class UsuariosServiceJPA implements IUsuariosService{
 	// Inyectamos una instancia desde nuestro Root ApplicationContext.
      @Autowired
  	private UsuariosRepository usuariosRepo;
+     
+   //  @Autowired
+   //  PasswordEncoder passwordEncoder;     
 
 	@Override
 	public List<Usuario> buscarTodas() {
@@ -60,10 +65,43 @@ public class UsuariosServiceJPA implements IUsuariosService{
 	}
 
 	@Override
-	public void insertar(Usuario usuario) {
+	public void insertar(Usuario usuario) throws NoSuchAlgorithmException {
+		
+		MessageDigest messageDigest = MessageDigest.getInstance("MD5");
+
+		String original = usuario.getPassword();
+		MessageDigest md = MessageDigest.getInstance("MD5");
+		md.update(original.getBytes());
+		byte[] digest = md.digest();
+		StringBuffer sb = new StringBuffer();
+		for (byte b : digest) {
+			sb.append(String.format("%02x", b & 0xff));
+		}	
+		usuario.setPassword(sb.toString());
+		usuario.setActivo(false);
 		usuariosRepo.save(usuario);
 		
 	}
+	
+	@Override
+	public void editar(Usuario usuario) throws NoSuchAlgorithmException {
+		/*
+		MessageDigest messageDigest = MessageDigest.getInstance("MD5");
+
+		String original = usuario.getPassword();
+		MessageDigest md = MessageDigest.getInstance("MD5");
+		md.update(original.getBytes());
+		byte[] digest = md.digest();
+		StringBuffer sb = new StringBuffer();
+		for (byte b : digest) {
+			sb.append(String.format("%02x", b & 0xff));
+		}	
+		usuario.setPassword(sb.toString());
+		usuario.setActivo(false);
+		*/
+		usuariosRepo.save(usuario);
+		
+	}	
 
 	@Override
 	public Usuario buscarPorId(int idUsuario) {

@@ -48,6 +48,7 @@
 			<url-pattern>/banners/*</url-pattern>
 			<url-pattern>/partidos/*</url-pattern>
 			<url-pattern>/jornadas/*</url-pattern>
+			<url-pattern>/usuarios/*</url-pattern>			
 		</web-resource-collection>
 		<auth-constraint>
 			<!-- Anyone with this role may access this area -->

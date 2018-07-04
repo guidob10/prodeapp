@@ -87,16 +87,18 @@
               <form:input type="text" class="form-control" path="password" id="password" required="required"  />
             </div>  
           </div>	
-          <!--  .. recuperar perfiles hardcodeados, e insertar en tabla de perfil -->
-          <div class="col-sm-3">
-            <div class="form-group">
-              <label for="jornada" class="control-label">Rol</label>                                           
-				<form:select id="perfil" path="perfil" itemValue="perfil" itemLabel="perfil" class="form-control" items="${roles}"/>                           
-            </div> 
-          </div>            		 			
-         
+                
+          <!--  .. recuperar perfiles hardcodeados, e insertar en tabla de perfil borro roles  -->
         </div>
-        
+        <div class="row">
+          <div class="col-sm-3">
+              <div class="form-group">
+                  <label for="estatus">Estatus</label>             
+						<form:radiobutton path="activo" value="${true}" />Activo 
+						<form:radiobutton path="activo" value="${false}" />Inactivo					
+              </div>
+          </div>           
+       	</div>
   
         <button type="submit" class="btn btn-danger" >Guardar</button>
       </form:form> 

@@ -6,23 +6,24 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-
+// Manejo de roles se hace por archivo web.xml, por lo que quizas definir
+// la clase no es lo mejor, mejor hardcodear en combo de usuario.
 @Entity
-@Table(name = "Usuarios")
-public class Usuario {
+@Table(name = "UsuarioPerfil")
+public class UsuarioPerfil {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY) // auto_increment MySQL
 	private int id;
-	private String nombre;
-	private String email;
-	private String username;
-	private String password; 
-	private Boolean activo;
-	// private boolean enabled;
+	private String perfil;
+	
+//	@OneToOne
+//	@JoinColumn(name = "username") // foreignKey 
+	private String username;			 
 	
 	
 	public int getId() {
@@ -33,22 +34,14 @@ public class Usuario {
 		this.id = id;
 	}
 
-	public String getNombre() {
-		return nombre;
+	public String getPerfil() {
+		return perfil;
 	}
 
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
+	public void setPerfil(String perfil) {
+		this.perfil = perfil;
 	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
+	
 	public String getUsername() {
 		return username;
 	}
@@ -56,14 +49,7 @@ public class Usuario {
 	public void setUsername(String username) {
 		this.username = username;
 	}
-
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
-	}
+	
 /*
 	public boolean isEnabled() {
 		return enabled;
@@ -76,16 +62,8 @@ public class Usuario {
 	/**
 	 * Constructor sin parametros
 	 */
-	public Usuario() {
+	public UsuarioPerfil() {
 
-	}
-
-	public Boolean getActivo() {
-		return activo;
-	}
-
-	public void setActivo(Boolean activo) {
-		this.activo = activo;
 	}	
 
 }

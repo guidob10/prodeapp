@@ -1,0 +1,3 @@
+
+ALTER TABLE `usuarios` 
+ADD COLUMN  `activo` BIT NULL DEFAULT 0;
