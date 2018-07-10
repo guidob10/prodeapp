@@ -23,7 +23,8 @@
 	            		<li><a href="${urlRoot}partidos/indexPaginate?page=0">Partidos</a></li>						
 						<li><a href="${urlRoot}noticias/index">Noticias</a></li>
 						<li><a href="${urlRoot}banners/index">Banner</a></li>
-						<li><a href="${urlRoot}usuarios/index">Usuarios</a></li>						
+						<li><a href="${urlRoot}usuarios/index">Usuarios</a></li>	
+						<li><a href="${urlRoot}rankings/index">Ranking</a></li>					
 						<li><a href="${urlRoot}admin/logout">Salir</a></li>
 					</ul>
 				</div>
@@ -42,6 +43,7 @@
 					<ul class="nav navbar-nav">
 	            		<li><a href="${urlRoot}">Inicio</a></li>  	            
 	            		<li><a href="${urlRoot}jornadas/indexPaginate?page=0">Apuestas</a></li>
+	            		<li><a href="${urlRoot}rankings/index">Ranking</a></li>
 	            		<li><a href="${urlRoot}admin/logout">Salir</a></li>	   
 					</ul>
 				</div>
@@ -57,10 +59,11 @@
 					<a class="navbar-brand" href="${urlRoot}">ProdeApp</a>
 				</div>
 				<div id="navbar" class="navbar-collapse collapse">
-					<ul class="nav navbar-nav">											   					   					   
+					<ul class="nav navbar-nav">										   					   					   
 					   <li><a href="${urlRoot}about">Acerca</a></li>
 					   <li><a href="${urlRoot}admin/index">Login</a></li>	
-					   <li><a href="${urlRoot}registro/registrar">Registro</a></li>					   
+					   <li><a href="${urlRoot}registro/registrar">Registro</a></li>	
+
 					</ul>
 				</div>
 			</c:otherwise>			

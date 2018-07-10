@@ -24,11 +24,14 @@ public class Apuesta {
 	@ManyToOne
 	@JoinColumn(name = "idPartido") // foreignKey 
 	private Partido partido;		
- 
-	 
+ 	 
 	@ManyToOne
 	@JoinColumn(name = "idUsuario") // foreignKey en la tabla de Peliculas
-	private Usuario usuario;	 	
+	private Usuario usuario;
+	
+	private boolean resultadoApuesta; // se actualiza via proceso el resultado una vez terminado Partido
+	
+	private Date fechaProceso; // fecha de actualizacion de resultado apuesta
   
 	public int getId() {
 		return id;
@@ -67,6 +70,22 @@ public class Apuesta {
 	 */
 	public Apuesta() {
 
+	}
+
+	public boolean isResultadoApuesta() {
+		return resultadoApuesta;
+	}
+
+	public void setResultadoApuesta(boolean resultadoApuesta) {
+		this.resultadoApuesta = resultadoApuesta;
+	}
+
+	public Date getFechaProceso() {
+		return fechaProceso;
+	}
+
+	public void setFechaProceso(Date fechaProceso) {
+		this.fechaProceso = fechaProceso;
 	}	
 
 }
