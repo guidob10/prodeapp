@@ -33,15 +33,10 @@ public class NoticiasServiceJPA implements INoticiasService{
 
 	@Override
 	public void eliminar(int idNoticia) {
-		// noticiasRepo.delete(idNoticia); // Spring 4.3
 		noticiasRepo.deleteById(idNoticia);
 	}
 
-	// Spring 4.3
-//	@Override
-//	public Noticia buscarPorId(int idNoticia) {
-//		return noticiasRepo.findOne(idNoticia); 
-//	}
+
 	
 	@Override
 	public Noticia buscarPorId(int idNoticia) {
