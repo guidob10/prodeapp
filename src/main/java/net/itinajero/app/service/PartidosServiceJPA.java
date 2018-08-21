@@ -1,31 +1,21 @@
 package net.itinajero.app.service;
 
  
-import java.text.Format;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import net.itinajero.app.model.Horario;
 import net.itinajero.app.model.Partido;
-import net.itinajero.app.model.Pelicula;
 import net.itinajero.app.repository.PartidosRepository;
 
 // Registramos esta clase como un Bean en nuestro Root ApplicationContext.
 @Service
 public class PartidosServiceJPA implements IPartidosService {
 	
-	// Inyectamos una instancia desde nuestro Root ApplicationContext.
- //   @Autowired	
-//	private HorariosRepository horariosRepo;
-	
+
     // Inyectamos una instancia desde nuestro Root ApplicationContext.
     @Autowired
 	private PartidosRepository partidosRepo;
@@ -45,7 +35,6 @@ public class PartidosServiceJPA implements IPartidosService {
 	@Override
 	public List<Partido> buscarPorJornada(int idJornada){
 		
-		//Date fecha = new Date();
 		List<Partido> partidos = partidosRepo.findByJornada_Id(idJornada); 
 		return partidos;
 				 		

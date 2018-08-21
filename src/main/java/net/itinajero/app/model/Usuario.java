@@ -22,7 +22,6 @@ public class Usuario {
 	private String username;
 	private String password; 
 	private Boolean activo;
-	// private boolean enabled;
 	
 	
 	public int getId() {
@@ -64,15 +63,7 @@ public class Usuario {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-/*
-	public boolean isEnabled() {
-		return enabled;
-	}
 
-	public void setEnabled(boolean enabled) {
-		this.enabled = enabled;
-	}
-*/
 	/**
 	 * Constructor sin parametros
 	 */

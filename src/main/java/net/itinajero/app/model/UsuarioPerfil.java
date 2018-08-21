@@ -11,7 +11,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 // Manejo de roles se hace por archivo web.xml, por lo que quizas definir
-// la clase no es lo mejor, mejor hardcodear en combo de usuario.
+// la clase no es lo mejor.
 @Entity
 @Table(name = "UsuarioPerfil")
 public class UsuarioPerfil {
@@ -22,7 +22,6 @@ public class UsuarioPerfil {
 	private String perfil;
 	
 //	@OneToOne
-//	@JoinColumn(name = "username") // foreignKey 
 	private String username;			 
 	
 	
@@ -50,15 +49,6 @@ public class UsuarioPerfil {
 		this.username = username;
 	}
 	
-/*
-	public boolean isEnabled() {
-		return enabled;
-	}
-
-	public void setEnabled(boolean enabled) {
-		this.enabled = enabled;
-	}
-*/
 	/**
 	 * Constructor sin parametros
 	 */

@@ -15,10 +15,6 @@ import net.itinajero.app.model.Club;
 */
 @Repository
 public interface ClubesRepository extends JpaRepository<Club, Integer> {
-
-	// Listado de peliculas filtradas por estatus
-	 //public List<Jornada> findByEstatus_OrderByTitulo(String estatus);
-//	public List<Jornada> findByFechaInicioGreaterThan(Date fechaInicio);
 	
 
 }

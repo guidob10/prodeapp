@@ -11,12 +11,7 @@ import net.itinajero.app.model.Usuario;
 
 public interface IUsuariosService {
 
-	//UserDetails loadUserByUsername(String username);
-
-	//List<Partido> buscarPorJornada(int id);
-		
 	List<Usuario> buscarTodas();
-	//List<String> buscarFechas();
 
 	Page<Usuario> buscarTodas(Pageable page);
 	
@@ -27,8 +22,4 @@ public interface IUsuariosService {
 
 	Usuario buscarDatosPerfil(String username) throws Exception;
 	
-	//void registrar(Usuario usuario);
-
-	//Usuario validarUsuario(Login login);	
-
 }

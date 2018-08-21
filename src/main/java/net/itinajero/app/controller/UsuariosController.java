@@ -1,10 +1,7 @@
 package net.itinajero.app.controller;
 
 import java.security.NoSuchAlgorithmException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
-import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -14,10 +11,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import net.itinajero.app.model.Club;
-import net.itinajero.app.model.Jornada;
-import net.itinajero.app.model.Partido;
-import net.itinajero.app.model.Pelicula;
+
 import net.itinajero.app.model.Usuario;
 import net.itinajero.app.model.UsuarioPerfil;
 import net.itinajero.app.service.IUsuariosPerfilService;
@@ -39,7 +33,6 @@ public class UsuariosController {
 
 	@GetMapping(value = "/index")
 	public String mostrarIndex(Model model) {
-	//	List<Apuesta> lista = serviceApuestas.buscarTodas();
 		List<Usuario> lista = serviceUsuarios.buscarTodas();
 		model.addAttribute("usuarios", lista);
 		return "usuarios/listUsuarios";

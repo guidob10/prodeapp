@@ -1,18 +1,13 @@
 package net.itinajero.app.controller;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -30,7 +25,6 @@ import org.springframework.web.bind.annotation.*;
 
 import net.itinajero.app.model.*;
 import net.itinajero.app.service.*;
-import net.itinajero.app.util.Utileria;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 
 @Controller
@@ -42,21 +36,12 @@ public class HomeController {
 	@Autowired
 	private IBannersService serviceBannners;
 	
-	// Inyectamos una instancia desde nuestro Root ApplicationContext
-	@Autowired
-	private IPeliculasService servicePeliculas;
-	
 	@Autowired
 	private IJornadasService serviceJornadas;
 	
 	@Autowired
 	private IPartidosService servicePartidos;	
 	
-	// Inyectamos una instancia desde nuestro Root ApplicationContext
-	@Autowired
-	private IHorariosService serviceHorarios;	
-	
-	// Inyectamos una instancia desde nuestro Root ApplicationContext
 	@Autowired
 	private INoticiasService serviceNoticias;
 	
@@ -78,18 +63,13 @@ public class HomeController {
 
 		try {
 		    Date fechaSinHora = dateFormat.parse(dateFormat.format(new Date()));
-			//List<Pelicula> peliculas = servicePeliculas.buscarPorFecha(fechaSinHora);	
 			List<String> listaFechas  = serviceJornadas.buscarFechas();
 			Jornada jornada = serviceJornadas.buscarPorFechaReciente();
 			List<Partido> partidos = servicePartidos.buscarPorJornada(jornada.getId());
 			log.warn("Home Controller inicio");
 
-			
-			//List<String> listaFechass = Utileria.getNextDays(4);
-			
 			model.addAttribute("fechas", listaFechas);
 			model.addAttribute("fechaBusqueda", dateFormat.format(new Date()));
-		 //	 model.addAttribute("peliculas", peliculas);
 			model.addAttribute("partidos",partidos);
 		} catch (ParseException e) {
 			System.out.println("Error: HomeController.mostrarPrincipal" + e.getMessage());
@@ -107,9 +87,7 @@ public class HomeController {
 	public String buscar(@RequestParam("fecha") Date fecha, Model model) {		
 		try {			
 			Date fechaSinHora = dateFormat.parse(dateFormat.format(fecha));
-		  //	List<String> listaFechass = Utileria.getNextDays(4);
-		//	List<Pelicula> peliculas  = servicePeliculas.buscarPorFecha(fechaSinHora);
-		//	peliculas = null;
+
 			List<String> listaFechas  = serviceJornadas.buscarFechas();
 			Jornada jornada = serviceJornadas.buscarPorFecha(fecha);
 			List<Partido> partidos = servicePartidos.buscarPorJornada(jornada.getId());
@@ -122,23 +100,6 @@ public class HomeController {
 			System.out.println("Error: HomeController.buscar" + e.getMessage());
 		}
 		return "home";
-	}
-
-	
-	/**
-	 * Metodo para ver los detalles y horarios de una pelicula
-	 * @param idPelicula
-	 * @param model
-	 * @return
-	 */
-	@RequestMapping(value = "/detail/{id}/{fecha}")
-	public String mostrarDetalle(@PathVariable("id") int idPelicula, @PathVariable("fecha") Date fecha, Model model) {
-		// TODO - Buscar en la base de datos los horarios.		
-		List<Horario> horarios= serviceHorarios.buscarPorIdPelicula(idPelicula, fecha);
-		model.addAttribute("horarios", horarios);
-		model.addAttribute("fechaBusqueda", dateFormat.format(fecha));
-		model.addAttribute("pelicula", servicePeliculas.buscarPorId(idPelicula));		
-		return "detalle";
 	}
 
 	/**
@@ -193,10 +154,9 @@ public class HomeController {
 
 		}
 		 else{
-
+			 // retorna error
 			 ResponseEntity<byte[]> response = new ResponseEntity<byte[]>(null, null, HttpStatus.FORBIDDEN);
-			 //return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Error Message");
-			    return response;	
+			 return response;	
 		 }
 
 	}

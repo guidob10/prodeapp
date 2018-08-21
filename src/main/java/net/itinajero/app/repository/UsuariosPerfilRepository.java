@@ -14,9 +14,6 @@ import net.itinajero.app.model.UsuarioPerfil;
 @Repository
 public interface UsuariosPerfilRepository extends JpaRepository<UsuarioPerfil, Integer> {
 
-	Usuario findByUsername(String username);
-
-		//Usuario findByUsername(String username);
-	
+	Usuario findByUsername(String username);	
 
 }

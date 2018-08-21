@@ -16,8 +16,6 @@ import net.itinajero.app.model.Jornada;
 @Repository
 public interface JornadasRepository extends JpaRepository<Jornada, Integer> {
 
-	// Listado de peliculas filtradas por estatus
-	 //public List<Jornada> findByEstatus_OrderByTitulo(String estatus);
 	public List<Jornada> findByFechaInicioEquals(Date fechaInicio);
 	public List<Jornada> findByFechaFinGreaterThan(Date fechaInicio);
 

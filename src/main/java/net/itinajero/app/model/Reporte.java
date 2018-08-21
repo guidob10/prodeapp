@@ -1,29 +1,12 @@
 package net.itinajero.app.model;
 
 import java.io.File;
-import java.util.Calendar;
 import java.util.HashMap;
-import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
 
 import org.apache.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.stereotype.Controller;
-import org.springframework.stereotype.Service;
-
-import com.mysql.jdbc.Connection;
-
-import jdk.nashorn.internal.parser.JSONParser;
 import net.itinajero.app.controller.HomeController;
-import net.itinajero.app.service.IParametrosService;
-import net.itinajero.app.service.IPartidosService;
-import net.itnajero.app.accesodatos.AccesoDB;
-import net.sf.jasperreports.engine.JRDataSource;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JRExporterParameter;
 import net.sf.jasperreports.engine.JRParameter;
@@ -36,21 +19,10 @@ import net.sf.jasperreports.engine.export.JRPdfExporter;
 import net.sf.jasperreports.engine.export.PdfFont;
 import net.sf.jasperreports.engine.xml.JRXmlLoader;
 
-import java.io.FileReader;
-import java.io.IOException;
+
 import java.io.PrintWriter;
 import java.io.StringWriter;
-import java.text.ParseException;
-import java.util.HashMap;
-import java.util.Map;
-
-import net.sf.jasperreports.engine.JRException;
-import net.sf.jasperreports.engine.JRExporterParameter;
-import net.sf.jasperreports.engine.JRParameter;
 import net.sf.jasperreports.engine.JRReportTemplate;
-import net.sf.jasperreports.engine.JasperCompileManager;
-import net.sf.jasperreports.engine.JasperFillManager;
-import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.engine.design.JRDesignExpression;
 import net.sf.jasperreports.engine.design.JRDesignParameter;
@@ -112,13 +84,7 @@ public class Reporte {
 		else 
 			_parametros = parametros;
 		
-			
-		
 		try {
-			
-			// agregarParametrosJson();
-			
-	//		agregarParametrosDefault();
 			
 			if (extension.equalsIgnoreCase("xls"))
 				_parametros.put(JRParameter.IS_IGNORE_PAGINATION, true);
@@ -144,7 +110,6 @@ public class Reporte {
 
 	
 	protected void abrirReportDesign() throws Exception{
-	//	_reportDesign = JRXmlLoader.load(_rutaReportes + _archivo);
 		
 		String ruta = extraerRutaReportes();
 				
@@ -162,12 +127,13 @@ public class Reporte {
 	
     public static String extraerRutaReportes() {
         String dir = "";
-     //   EntityManager unAcceso = AccesoDB.obtenerInstancia("Parametro");
+        // EntityManager unAcceso = AccesoDB.obtenerInstancia("Parametro");
+        // Utilizacion de parametro para elegir ambiente
         if (_ambiente == "desarrollo"){
         	
         }
 
-// pregunta si esta en webapps, o sea servidor, si no busca en reporte de desarrollo parece.
+        // pregunta si esta en webapps, o sea servidor, si no busca en reporte de desarrollo parece.
         // baja directorios hasta llegar a webapps, ahi agrega nombre de app donde se esta ejecutando y queda en ruta
         //relativa.
         File f = new File(Reporte.class.getProtectionDomain().getCodeSource().getLocation().getFile());
@@ -211,10 +177,6 @@ public class Reporte {
 		for (int i=0; i < parametros.length; i++){
 			JRDesignParameter parametro = (JRDesignParameter) parametros[i];
 			if (!parametro.isSystemDefined() && parametro.getValueClassName().equals("net.sf.jasperreports.engine.JasperReport") ){
-			//	SubReporte subreporte = new SubReporte(this);
-			//	subreporte.generarSubreporte(parametro.getName());
-			//	_subreportes.put(parametro.getName(), subreporte);
-			//	_parametros.put(parametro.getName(), subreporte._reportCompile);
 				
 			}
 			
@@ -272,7 +234,6 @@ public class Reporte {
 		exporter.setParameter(JRExporterParameter.OUTPUT_FILE_NAME, unaRutaSalida);
 		
 		exporter.exportReport();
-		// exporter.exportReportToPdfFile()
 		
 	}
 	

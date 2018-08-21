@@ -16,9 +16,6 @@ import net.itinajero.app.model.Ranking;
 */
 @Repository
 public interface RankingsRepository extends JpaRepository<Ranking, Integer> {
-
-
-//	public Ranking findByPartido_IdAndUsuario_Id(int idPartido, int idUsuario);
 	
 	
 

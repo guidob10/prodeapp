@@ -19,10 +19,6 @@ import net.itinajero.app.repository.JornadasRepository;
 @Service
 public class JornadasServiceJPA implements IJornadasService {
 	
-	// Inyectamos una instancia desde nuestro Root ApplicationContext.
- //   @Autowired	
-//	private HorariosRepository horariosRepo;
-	
     // Inyectamos una instancia desde nuestro Root ApplicationContext.
     @Autowired
 	private JornadasRepository jornadasRepo;
@@ -31,22 +27,7 @@ public class JornadasServiceJPA implements IJornadasService {
 	public void insertar(Jornada jornada) {
 		jornadasRepo.save(jornada);
 	}
-/*
-	@Override
-	public List<Pelicula> buscarPorFecha(Date fecha) {		
-		List<Pelicula> peliculas = null;
-		// Buscamos en la tabla de horarios, [agrupando por idPelicula]
-		List<Horario> horarios = horariosRepo.findByFecha(fecha);
-		peliculas = new LinkedList<>();
 
-		// Formamos la lista final de Peliculas que regresaremos.
-		for (Horario h : horarios) {
-			// Solo nos interesa de cada registro de horario, el registro de pelicula.
-			peliculas.add(h.getPelicula());
-		}		
-		return peliculas;
-	}
-*/
 	@Override
 	public List<Jornada> buscarTodas() {
 		return jornadasRepo.findAll();		
@@ -60,30 +41,15 @@ public class JornadasServiceJPA implements IJornadasService {
 		return null;
 	}	
 	
-
 	@Override
 	public void eliminar(int idJornada) {
-		//peliculasRepo.delete(idPelicula); // Spring 4.3
 		jornadasRepo.deleteById(idJornada);
-		
 	}	
-/*
-	@Override
-	public List<Pelicula> buscarActivas() {
-		List<Pelicula> peliculas = null;
-		peliculas = peliculasRepo.findByEstatus_OrderByTitulo("Activa");
-		return peliculas;
-	}
 
-		
-*/
 	@Override
 	public Page<Jornada> buscarTodas(Pageable page) {
 		return jornadasRepo.findAll(page);
 	}
-	
-	
-	//recupero fechas de fixture
 	 
 	@Override
 	public List<String> buscarFechas() {
@@ -91,9 +57,8 @@ public class JornadasServiceJPA implements IJornadasService {
 		List<Jornada> jornadas = jornadasRepo.findAll();
 		List<String> fechas = new ArrayList<String>();
 		Format formatter = new SimpleDateFormat("dd-MM-yyyy");
-		// Formamos la lista final de Peliculas que regresaremos.
+
 		for (Jornada j : jornadas) {
-			// Solo nos interesa de cada registro de horario, el registro de pelicula.
 			String s = formatter.format(j.getFechaInicio());
 			fechas.add(s);
 		}		

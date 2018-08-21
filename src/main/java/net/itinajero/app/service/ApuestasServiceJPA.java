@@ -23,15 +23,7 @@ public class ApuestasServiceJPA implements IApuestasService{
 	public void insertar(Apuesta apuesta) {
 		apuestasRepo.save(apuesta);
 	}
-	 /*
-	@Override
-	public List<Apuesta> buscarPorJornada(int idJornada){
-		
-		//Date fecha = new Date();
-		List<Apuesta> apuestas = apuestasRepo.findByJornada_Id(idJornada); 
-		return apuestas;
-				 		
-	}*/
+
 
 	@Override
 	public List<Apuesta> buscarPorPartidos(List<Partido> partidos, Usuario usuario) {	
@@ -47,13 +39,6 @@ public class ApuestasServiceJPA implements IApuestasService{
 		return apuestas;
 	}
 	 
-/*
-	@Override
-	public void eliminar(int idApuesta) {
-		// detallesRepo.delete(idDetalle); // Spring 4.3
-		apuestasRepo.deleteById(idApuesta);
-	}
-*/
 
 
 }

@@ -1,7 +1,6 @@
 package net.itinajero.app.model;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Calendar;
 import java.util.HashMap;
@@ -9,7 +8,6 @@ import java.util.HashMap;
 import net.sf.jasperreports.engine.JRDataSource;
 import net.sf.jasperreports.engine.JRParameter;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
-//import ar.com.jasperphp.cfe.reporte.Reporte;
 
 public class RptProde extends Reporte {
 
@@ -25,7 +23,7 @@ public class RptProde extends Reporte {
 
 	@Override
 	public boolean generar(String nombreReporte,HashMap<String, Object> parametros,String extension, String ambiente) {
-		// _username = (String) parametros.get("username");
+
 		return super.generar(nombreReporte,parametros, extension,ambiente);
 	}
 	

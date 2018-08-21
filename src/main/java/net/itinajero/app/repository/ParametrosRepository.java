@@ -17,9 +17,4 @@ import net.itinajero.app.model.Partido;
 @Repository
 public interface ParametrosRepository extends JpaRepository<Parametro, Integer> {
 
-	// ver como traer por array		
-	//public Apuesta findByPartido_Id(int idPartido);
-	
-	
-
 }

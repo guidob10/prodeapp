@@ -20,9 +20,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import net.itinajero.app.model.Banner;
 import net.itinajero.app.model.Jornada;
-import net.itinajero.app.model.Partido;
 import net.itinajero.app.service.IJornadasService;
 
 @Controller
@@ -42,7 +40,7 @@ public class JornadasController {
 	}
 	
 	/**
-	 * Metodo que muestra la lista de peliculas con paginacion
+	 * Metodo que muestra la lista de jornadas con paginacion
 	 * @param model
 	 * @param page
 	 * @return
