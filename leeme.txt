@@ -1,0 +1,19 @@
+﻿Tecnologias
+Backend: Spring MVC, JPA, Java, Tomcat
+Frontend: HTML, CSS, BOOTSTRAP y JS en JSP.
+Reportes: JasperReports
+Base de datos: Mysql 5 pass= inta2020  user admin: luis pass: luis123
+Seguridad: JDBCRealm(Login). 
+
+Configuracion y Herramientas:
+Context.xml (Perfiles de usuarios:Administrador, jugador)
+WEB.xml (permisos por rol, errores)
+Rootcontext.xml (repository,service, beans, datasource,etc)
+Dispatcher-servlet.xml (views, recursos estaticos)
+Maven, POM,xml.
+LOG4J
+No Ajax
+
+Deploy:
+Instancia AWS, deployado con .WAR(javas agrupados) en /opt/tomcat/webapps
+./Catalina.sh stop / start en /opt/tomcat/bin --> Reinicia server
