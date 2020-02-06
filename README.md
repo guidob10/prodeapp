@@ -1,5 +1,5 @@
 # PRODEAPP
-.App en Spring MVC + JpaRepository + JSP
+.App en Spring MVC + JSP + JpaRepository + MYSQL 
 
 .Aplicacion Web para realizar prodes con los resultados semanales de la LNB, cada jugador debera
 seleccionar los resultados y al terminarse la jornada se calcula puntaje y resultados de cada jugador.
