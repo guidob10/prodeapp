@@ -9,4 +9,5 @@ seleccionar los resultados y al terminarse la jornada se calcula puntaje y resul
 
 ![alt text](http://dolarhoyinfo.com/pics/indexxx.png)
 ![alt text](http://dolarhoyinfo.com/pics/fff.png)
+![alt text](http://dolarhoyinfo.com/pics/rrr.png)
 ![alt text](http://dolarhoyinfo.com/pics/eee.png)
