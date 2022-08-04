@@ -1,13 +1,19 @@
 # PRODEAPP
-.App en Spring MVC + JSP + JpaRepository + MYSQL 
+ 
+_App en Spring MVC + JSP + JpaRepository + MYSQL _
+ 
+_Aplicacion Web para realizar prodes con los resultados semanales de la LNB, cada jugador debera seleccionar los resultados y al terminarse la jornada se calcula puntaje y resultados de cada jugador._
 
-.Aplicacion Web para realizar prodes con los resultados semanales de la LNB, cada jugador debera
-seleccionar los resultados y al terminarse la jornada se calcula puntaje y resultados de cada jugador.
+### Funciones ###
 
+* Permite apostar por cada partido y luego calcular resultados.
+* Administrar Partidos, Puntos, etc.
 
-.User Prueba:luis pass:mari123
+### Requerimientos ###
 
-![alt text](http://dolarhoyinfo.com/pics/indexxx.png)
-![alt text](http://dolarhoyinfo.com/pics/fff.png)
-![alt text](http://dolarhoyinfo.com/pics/rrr.png)
-![alt text](http://dolarhoyinfo.com/pics/eee.png)
+* Servidor Web Apache Tomcat
+  
+### Documentacion ###  
+
+* Ver documento Documento Pantallas de Sistema.docx
+* User Prueba:luis pass:mari123
